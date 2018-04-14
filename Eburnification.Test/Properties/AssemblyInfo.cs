@@ -1,5 +1,6 @@
+// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
+
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Eburnification.Test")]

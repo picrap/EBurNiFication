@@ -35,7 +35,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\TextParser.cs" />
+    <Compile Include="Parser\TextTokenizer.cs" />
+    <Compile Include="Parser\Tokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbols\Symbol.cs" />
   </ItemGroup>

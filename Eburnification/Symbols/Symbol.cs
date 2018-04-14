@@ -1,4 +1,6 @@
-﻿namespace Eburnification.Symbols
+﻿// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
+
+namespace Eburnification.Symbols
 {
     using Parser;
 
@@ -86,7 +88,9 @@
         {
             while (tokenizer.TryRead(" ") || tokenizer.TryRead("\t") || tokenizer.TryRead("\n")
                    || tokenizer.TryRead("\r\n") || tokenizer.TryRead("\r"))
-            { }
+            {
+            }
+
             return true;
         }
     }
@@ -122,6 +126,7 @@
                 tokenizer = st1;
                 return true;
             }
+
             var st2 = tokenizer.CreateSubTokenizer();
             if (TryParseSecondTerminalString(ref st2))
             {

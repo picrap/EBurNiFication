@@ -1,4 +1,6 @@
-﻿namespace Eburnification.Test
+﻿// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
+
+namespace Eburnification.Test
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Parser;
