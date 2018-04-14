@@ -7,26 +7,40 @@
     {
         public abstract Tokenizer CreateSubTokenizer();
 
-        public virtual Tokenizer SkipNonSignificant()
-        {
-            return this;
-        }
+        public abstract char? Peek(int offset);
+        public abstract void Next(int step);
+        public virtual void Next() => Next(1);
 
-        public abstract char? ReadNext();
-        public abstract char? Current { get; }
+        public virtual char? Current => Peek(0);
+        public virtual char? ReadNext()
+        {
+            var c = Current;
+            Next();
+            return c;
+        }
 
         public virtual bool TryRead(Predicate<char> predicate)
         {
             var current = Current;
             if (!current.HasValue || !predicate(current.Value))
                 return false;
-            // TODO a simple Next()
-            ReadNext();
+            Next();
             return true;
         }
 
-        public abstract bool TryRead(string expectedCharacter);
-        public abstract bool TryRead(char expectedCharacter);
+        public virtual bool TryRead(char expectedCharacter) => TryRead(c => c == expectedCharacter);
+
+        public virtual bool TryRead(string expectedCharacter)
+        {
+            for (int index = 0; index < expectedCharacter.Length; index++)
+            {
+                if (Peek(index) != expectedCharacter[index])
+                    return false;
+            }
+
+            Next(expectedCharacter.Length);
+            return true;
+        }
     }
 
     [DebuggerDisplay("{" + nameof(Debug) + "}")]
@@ -48,11 +62,17 @@
             }
         }
 
-        public override char? Current => Get(_cursor);
-
-        private char? Get(int cursor)
+        public override char? Peek(int offset)
         {
+            var cursor = _cursor + offset;
             return cursor < _text.Length ? _text[cursor] : (char?)null;
+        }
+
+        public override void Next(int step)
+        {
+            // this is a raw overflow check, but we don't care much
+            if (_cursor < _text.Length)
+                _cursor += step;
         }
 
         public TextTokenizer(string text, int cursor = 0)
@@ -66,50 +86,5 @@
             return new TextTokenizer(_text, _cursor);
         }
 
-        public override Tokenizer SkipNonSignificant()
-        {
-            for (; ; )
-            {
-                var c = Current;
-                if (!c.HasValue || !char.IsWhiteSpace(c.Value))
-                    break;
-                Next();
-            }
-
-            return this;
-        }
-
-        private void Next()
-        {
-            if (_cursor < _text.Length)
-                _cursor++;
-        }
-
-        public override char? ReadNext()
-        {
-            var c = Current;
-            Next();
-            return c;
-        }
-
-        public override bool TryRead(string expectedCharacter)
-        {
-            for (int index = 0; index < expectedCharacter.Length; index++)
-            {
-                if (Get(_cursor + index) != expectedCharacter[index])
-                    return false;
-            }
-
-            _cursor += expectedCharacter.Length;
-            return true;
-        }
-
-        public override bool TryRead(char expectedCharacter)
-        {
-            if (Current != expectedCharacter)
-                return false;
-            _cursor++;
-            return true;
-        }
     }
 }

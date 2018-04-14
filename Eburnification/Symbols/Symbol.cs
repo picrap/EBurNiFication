@@ -84,7 +84,9 @@
     {
         public override bool TryParse(ref Tokenizer tokenizer)
         {
-            while (tokenizer.TryRead(" ") || tokenizer.TryRead("\t") || tokenizer.TryRead("\n") || tokenizer.TryRead("\r\n") || tokenizer.TryRead("\r")) { }
+            while (tokenizer.TryRead(" ") || tokenizer.TryRead("\t") || tokenizer.TryRead("\n")
+                   || tokenizer.TryRead("\r\n") || tokenizer.TryRead("\r"))
+            { }
             return true;
         }
     }
