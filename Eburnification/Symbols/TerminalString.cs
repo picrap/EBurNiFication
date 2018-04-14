@@ -2,28 +2,28 @@
 
 namespace Eburnification.Symbols
 {
-    using Parser;
+    using Parsing;
 
     public class TerminalString : Symbol<TerminalString>
     {
-        public override bool TryParse(Tokenizer tokenizer)
+        public override bool TryParse(Parser parser)
         {
-            return TryParse(tokenizer, TryParseFirstTerminalString)
-                   || TryParse(tokenizer, TryParseSecondTerminalString);
+            return TryParse(parser, TryParseFirstTerminalString)
+                   || TryParse(parser, TryParseSecondTerminalString);
         }
 
-        private bool TryParseFirstTerminalString(Tokenizer tokenizer)
+        private bool TryParseFirstTerminalString(Parser parser)
         {
-            return FirstQuoteSymbol.Instance.TryParse(tokenizer)
-                   && TryParseSequence(tokenizer, FirstTerminalCharacter.Instance).HasValue
-                   && FirstQuoteSymbol.Instance.TryParse(tokenizer);
+            return FirstQuoteSymbol.Instance.TryParse(parser)
+                   && TryParseSequence(parser, FirstTerminalCharacter.Instance).HasValue
+                   && FirstQuoteSymbol.Instance.TryParse(parser);
         }
 
-        private bool TryParseSecondTerminalString(Tokenizer tokenizer)
+        private bool TryParseSecondTerminalString(Parser parser)
         {
-            return SecondQuoteSymbol.Instance.TryParse(tokenizer)
-                   && TryParseSequence(tokenizer, SecondTerminalCharacter.Instance).HasValue
-                   && SecondQuoteSymbol.Instance.TryParse(tokenizer);
+            return SecondQuoteSymbol.Instance.TryParse(parser)
+                   && TryParseSequence(parser, SecondTerminalCharacter.Instance).HasValue
+                   && SecondQuoteSymbol.Instance.TryParse(parser);
         }
     }
 }

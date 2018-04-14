@@ -1,8 +1,8 @@
 ﻿// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
 
-namespace Eburnification.Parser
+namespace Eburnification.Parsing
 {
-    public abstract class TokenizerState
+    public abstract class ParserState
     {
     }
 }

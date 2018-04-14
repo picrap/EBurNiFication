@@ -1,11 +1,11 @@
 ﻿// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
 
-namespace Eburnification.Parser
+namespace Eburnification.Parsing
 {
     using System.Diagnostics;
 
     [DebuggerDisplay("{" + nameof(Debug) + "}")]
-    public class TextTokenizer : Tokenizer
+    public class TextParser : Parser
     {
         private readonly string _text;
         private int _cursor;
@@ -23,13 +23,13 @@ namespace Eburnification.Parser
             }
         }
 
-        public override TokenizerState State
+        public override ParserState State
         {
-            get { return new TextTokenizerState(_cursor); }
-            set { _cursor = ((TextTokenizerState)value).Cursor; }
+            get { return new TextParserState(_cursor); }
+            set { _cursor = ((TextParserState)value).Cursor; }
         }
 
-        public TextTokenizer(string text, int cursor = 0)
+        public TextParser(string text, int cursor = 0)
         {
             _text = text;
             _cursor = cursor;
@@ -48,9 +48,9 @@ namespace Eburnification.Parser
                 _cursor = _text.Length;
         }
 
-        public override string GetCapture(TokenizerState state)
+        public override string GetCapture(ParserState state)
         {
-            var cursor = ((TextTokenizerState)state).Cursor;
+            var cursor = ((TextParserState)state).Cursor;
             var capture = _text.Substring(cursor, _cursor - cursor);
             return capture;
         }

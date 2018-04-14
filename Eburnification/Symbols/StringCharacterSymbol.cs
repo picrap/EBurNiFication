@@ -1,15 +1,15 @@
 ﻿namespace Eburnification.Symbols
 {
-    using Parser;
+    using Parsing;
 
     public abstract class StringCharacterSymbol<TSymbol> : Symbol<TSymbol>
         where TSymbol : Symbol<TSymbol>, new()
     {
         protected abstract string Character { get; }
 
-        public override bool TryParse(Tokenizer tokenizer)
+        public override bool TryParse(Parser parser)
         {
-            return tokenizer.TryRead(Character);
+            return parser.TryRead(Character);
         }
     }
 }

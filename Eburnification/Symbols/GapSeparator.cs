@@ -2,14 +2,14 @@
 
 namespace Eburnification.Symbols
 {
-    using Parser;
+    using Parsing;
 
     public class GapSeparator : Symbol<GapSeparator>
     {
-        public override bool TryParse(Tokenizer tokenizer)
+        public override bool TryParse(Parser parser)
         {
-            while (tokenizer.TryRead(" ") || tokenizer.TryRead("\t") || tokenizer.TryRead("\n")
-                   || tokenizer.TryRead("\r\n") || tokenizer.TryRead("\r"))
+            while (parser.TryRead(" ") || parser.TryRead("\t") || parser.TryRead("\n")
+                   || parser.TryRead("\r\n") || parser.TryRead("\r"))
             {
             }
 

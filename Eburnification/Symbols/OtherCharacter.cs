@@ -4,15 +4,15 @@ namespace Eburnification.Symbols
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Parser;
+    using Parsing;
 
     public class OtherCharacter : Symbol<OtherCharacter>
     {
         private static readonly IEnumerable<char> OtherCharacters = " .:!+_%@&#$<>/\\~^";
 
-        public override bool TryParse(Tokenizer tokenizer)
+        public override bool TryParse(Parser parser)
         {
-            return tokenizer.TryRead(c => OtherCharacters.Contains(c));
+            return parser.TryRead(c => OtherCharacters.Contains(c));
         }
     }
 }

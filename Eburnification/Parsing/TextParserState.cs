@@ -1,12 +1,12 @@
 ﻿// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
 
-namespace Eburnification.Parser
+namespace Eburnification.Parsing
 {
-    public class TextTokenizerState : TokenizerState
+    public class TextParserState : ParserState
     {
         public int Cursor { get; }
 
-        public TextTokenizerState(int cursor)
+        public TextParserState(int cursor)
         {
             Cursor = cursor;
         }

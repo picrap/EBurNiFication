@@ -35,10 +35,11 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\TextTokenizer.cs" />
-    <Compile Include="Parser\TextTokenizerState.cs" />
-    <Compile Include="Parser\Tokenizer.cs" />
-    <Compile Include="Parser\TokenizerState.cs" />
+    <Compile Include="Parsing\TextParser.cs" />
+    <Compile Include="Parsing\TextParserState.cs" />
+    <Compile Include="Parsing\Token.cs" />
+    <Compile Include="Parsing\Parser.cs" />
+    <Compile Include="Parsing\ParserState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbols\BracketedTextualComment.cs" />
     <Compile Include="Symbols\CharCharacterSymbol.cs" />

@@ -3,7 +3,7 @@
 namespace Eburnification.Test
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Parser;
+    using Parsing;
     using Symbols;
 
     [TestClass]
@@ -13,7 +13,7 @@ namespace Eburnification.Test
         public void ValidFirstTerminalString()
         {
             var s = "'dude'";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsTrue(TerminalString.Instance.TryParse(tp));
         }
 
@@ -21,7 +21,7 @@ namespace Eburnification.Test
         public void InvalidFirstTerminalString()
         {
             var s = "'unfinished business";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsFalse(TerminalString.Instance.TryParse(tp));
         }
 
@@ -29,7 +29,7 @@ namespace Eburnification.Test
         public void ValidSecondTerminalString()
         {
             var s = "\"double dude\"";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsTrue(TerminalString.Instance.TryParse(tp));
         }
 
@@ -37,7 +37,7 @@ namespace Eburnification.Test
         public void InvalidSecondTerminalString()
         {
             var s = "\"unfinished double business";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsFalse(TerminalString.Instance.TryParse(tp));
         }
 
@@ -45,7 +45,7 @@ namespace Eburnification.Test
         public void ValidInteger()
         {
             var s = "1234";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsTrue(Integer.Instance.TryParse(tp));
         }
 
@@ -53,7 +53,7 @@ namespace Eburnification.Test
         public void ValidIntegerWithTrailing()
         {
             var s = "5678a";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsTrue(Integer.Instance.TryParse(tp));
         }
 
@@ -61,7 +61,7 @@ namespace Eburnification.Test
         public void InvalidIntegerWithTrailing()
         {
             var s = "ijk";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsFalse(Integer.Instance.TryParse(tp));
         }
 
@@ -69,7 +69,7 @@ namespace Eburnification.Test
         public void MetaIdentifierIntegerWithTrailing()
         {
             var s = "q1";
-            Tokenizer tp = new TextTokenizer(s);
+            Parser tp = new TextParser(s);
             Assert.IsTrue(MetaIdentifier.Instance.TryParse(tp));
         }
     }

@@ -2,16 +2,16 @@
 
 namespace Eburnification.Symbols
 {
-    using Parser;
+    using Parsing;
 
     public abstract class CharCharacterSymbol<TSymbol> : Symbol<TSymbol>
         where TSymbol : Symbol<TSymbol>, new()
     {
         protected abstract char Character { get; }
 
-        public override bool TryParse(Tokenizer tokenizer)
+        public override bool TryParse(Parser parser)
         {
-            return tokenizer.TryRead(Character);
+            return parser.TryRead(Character);
         }
     }
 }

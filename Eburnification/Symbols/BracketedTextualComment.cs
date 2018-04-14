@@ -2,20 +2,20 @@
 
 namespace Eburnification.Symbols
 {
-    using Parser;
+    using Parsing;
 
     public class BracketedTextualComment : Symbol<BracketedTextualComment>
     {
-        public override bool TryParse(Tokenizer tokenizer)
+        public override bool TryParse(Parser parser)
         {
-            return TryParse(tokenizer, TryParseBracketedTextualComment);
+            return TryParse(parser, TryParseBracketedTextualComment);
         }
 
-        private bool TryParseBracketedTextualComment(Tokenizer tokenizer)
+        private bool TryParseBracketedTextualComment(Parser parser)
         {
-            return StartCommentSymbol.Instance.TryParse(tokenizer)
-                   && TryParseSequence(tokenizer, CommentSymbol.Instance, 0, int.MaxValue).HasValue
-                   && EndCommentSymbol.Instance.TryParse(tokenizer);
+            return StartCommentSymbol.Instance.TryParse(parser)
+                   && TryParseSequence(parser, CommentSymbol.Instance, 0, int.MaxValue).HasValue
+                   && EndCommentSymbol.Instance.TryParse(parser);
         }
     }
 }

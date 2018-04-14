@@ -1,10 +1,10 @@
 ﻿// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
 
-namespace Eburnification.Parser
+namespace Eburnification.Parsing
 {
     using System;
 
-    public abstract class Tokenizer
+    public abstract class Parser
     {
         /// <summary>
         /// Gets or sets the state.
@@ -13,7 +13,7 @@ namespace Eburnification.Parser
         /// <value>
         /// The state.
         /// </value>
-        public abstract TokenizerState State { get; set; }
+        public abstract ParserState State { get; set; }
 
         public abstract char? Peek(int offset);
         public virtual char? Peek() => Peek(0);
@@ -58,6 +58,6 @@ namespace Eburnification.Parser
         /// </summary>
         /// <param name="state">The state.</param>
         /// <returns></returns>
-        public abstract string GetCapture(TokenizerState state);
+        public abstract string GetCapture(ParserState state);
     }
 }

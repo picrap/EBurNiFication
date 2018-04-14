@@ -2,13 +2,13 @@
 
 namespace Eburnification.Symbols
 {
-    using Parser;
+    using Parsing;
 
     public class MetaIdentifierCharacter : Symbol<MetaIdentifierCharacter>
     {
-        public override bool TryParse(Tokenizer tokenizer)
+        public override bool TryParse(Parser parser)
         {
-            return tokenizer.TryRead(char.IsLetterOrDigit);
+            return parser.TryRead(char.IsLetterOrDigit);
         }
     }
 }

@@ -3,32 +3,32 @@
 namespace Eburnification.Symbols
 {
     using System;
-    using Parser;
+    using Parsing;
 
     public abstract class Symbol
     {
         /// <summary>
         ///     Tries to parse symbol from current tokenizer.
         /// </summary>
-        /// <param name="tokenizer">The tokenizer.</param>
+        /// <param name="parser">The tokenizer.</param>
         /// <returns></returns>
-        public abstract bool TryParse(Tokenizer tokenizer);
+        public abstract bool TryParse(Parser parser);
 
-        protected bool TryParse(Tokenizer tokenizer, Predicate<Tokenizer> tryParse)
+        protected bool TryParse(Parser parser, Predicate<Parser> tryParse)
         {
-            var s = tokenizer.State;
-            var result = tryParse(tokenizer);
+            var s = parser.State;
+            var result = tryParse(parser);
             if (!result)
-                tokenizer.State = s;
+                parser.State = s;
             return result;
         }
 
-        protected int? TryParseSequence(Tokenizer tokenizer, Symbol symbol, int max = int.MaxValue, bool strict = true)
+        protected int? TryParseSequence(Parser parser, Symbol symbol, int max = int.MaxValue, bool strict = true)
         {
             int count = 0;
             for (; count < max; count++)
             {
-                var parsed = symbol.TryParse(tokenizer);
+                var parsed = symbol.TryParse(parser);
                 if (!parsed)
                     break;
             }
@@ -36,10 +36,10 @@ namespace Eburnification.Symbols
             // if max is reached, see if there is nothing behind
             if (strict && count == max)
             {
-                var s = tokenizer.State;
-                if (symbol.TryParse(tokenizer))
+                var s = parser.State;
+                if (symbol.TryParse(parser))
                 {
-                    tokenizer.State = s;
+                    parser.State = s;
                     return null;
                 }
             }
@@ -47,14 +47,14 @@ namespace Eburnification.Symbols
             return count;
         }
 
-        protected int? TryParseSequence(Tokenizer tokenizer, Symbol symbol, int min, int max, bool strict = true)
+        protected int? TryParseSequence(Parser parser, Symbol symbol, int min, int max, bool strict = true)
         {
-            var s = tokenizer.State;
-            var count = TryParseSequence(tokenizer, symbol, max, strict);
+            var s = parser.State;
+            var count = TryParseSequence(parser, symbol, max, strict);
             if (count >= min)
                 return count;
 
-            tokenizer.State = s;
+            parser.State = s;
             return null;
         }
     }
