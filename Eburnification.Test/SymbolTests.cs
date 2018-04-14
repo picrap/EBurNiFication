@@ -15,7 +15,7 @@ namespace Eburnification.Test
             var s = "'dude'";
             Tokenizer tp = new TextTokenizer(s);
             var ts = new TerminalString();
-            Assert.IsTrue(ts.TryParse(ref tp));
+            Assert.IsTrue(ts.TryParse(tp));
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace Eburnification.Test
             var s = "'unfinished business";
             Tokenizer tp = new TextTokenizer(s);
             var ts = new TerminalString();
-            Assert.IsFalse(ts.TryParse(ref tp));
+            Assert.IsFalse(ts.TryParse(tp));
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Eburnification.Test
             var s = "\"double dude\"";
             Tokenizer tp = new TextTokenizer(s);
             var ts = new TerminalString();
-            Assert.IsTrue(ts.TryParse(ref tp));
+            Assert.IsTrue(ts.TryParse(tp));
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace Eburnification.Test
             var s = "\"unfinished double business";
             Tokenizer tp = new TextTokenizer(s);
             var ts = new TerminalString();
-            Assert.IsFalse(ts.TryParse(ref tp));
+            Assert.IsFalse(ts.TryParse(tp));
         }
     }
 }

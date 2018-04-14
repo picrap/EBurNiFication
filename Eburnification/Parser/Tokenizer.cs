@@ -6,7 +6,14 @@ namespace Eburnification.Parser
 
     public abstract class Tokenizer
     {
-        public abstract Tokenizer CreateSubTokenizer();
+        /// <summary>
+        /// Gets or sets the state.
+        /// This allows to rollback on complex parsing
+        /// </summary>
+        /// <value>
+        /// The state.
+        /// </value>
+        public abstract TokenizerState State { get; set; }
 
         public abstract char? Peek(int offset);
         public abstract void Next(int step);
@@ -43,5 +50,12 @@ namespace Eburnification.Parser
             Next(expectedCharacter.Length);
             return true;
         }
+
+        /// <summary>
+        /// Gets the capture from saved state to current state.
+        /// </summary>
+        /// <param name="state">The state.</param>
+        /// <returns></returns>
+        public abstract string GetCapture(TokenizerState state);
     }
 }

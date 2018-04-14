@@ -23,17 +23,10 @@ namespace Eburnification.Parser
             }
         }
 
-        public override char? Peek(int offset)
+        public override TokenizerState State
         {
-            var cursor = _cursor + offset;
-            return cursor < _text.Length ? _text[cursor] : (char?) null;
-        }
-
-        public override void Next(int step)
-        {
-            // this is a raw overflow check, but we don't care much
-            if (_cursor < _text.Length)
-                _cursor += step;
+            get { return new TextTokenizerState(_cursor); }
+            set { _cursor = ((TextTokenizerState)value).Cursor; }
         }
 
         public TextTokenizer(string text, int cursor = 0)
@@ -42,9 +35,24 @@ namespace Eburnification.Parser
             _cursor = cursor;
         }
 
-        public override Tokenizer CreateSubTokenizer()
+        public override char? Peek(int offset)
         {
-            return new TextTokenizer(_text, _cursor);
+            var cursor = _cursor + offset;
+            return cursor < _text.Length ? _text[cursor] : (char?)null;
+        }
+
+        public override void Next(int step)
+        {
+            _cursor += step;
+            if (_cursor > _text.Length)
+                _cursor = _text.Length;
+        }
+
+        public override string GetCapture(TokenizerState state)
+        {
+            var cursor = ((TextTokenizerState)state).Cursor;
+            var capture = _text.Substring(cursor, _cursor - cursor);
+            return capture;
         }
     }
 }
