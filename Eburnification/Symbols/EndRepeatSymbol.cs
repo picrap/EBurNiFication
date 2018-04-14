@@ -2,8 +2,8 @@
 
 namespace Eburnification.Symbols
 {
-    public class FirstQuoteSymbol : CharCharacterSymbol<FirstQuoteSymbol>
+    public class EndRepeatSymbol : CharCharacterSymbol<EndRepeatSymbol>
     {
-        protected override char Character => '\'';
+        protected override char Character => '}';
     }
 }

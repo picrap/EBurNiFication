@@ -4,14 +4,11 @@ namespace Eburnification.Symbols
 {
     using Parser;
 
-    public abstract class CharCharacterSymbol<TSymbol> : Symbol<TSymbol>
-        where TSymbol : Symbol<TSymbol>, new()
+    public class Integer : Symbol<Integer>
     {
-        protected abstract char Character { get; }
-
         public override bool TryParse(Tokenizer tokenizer)
         {
-            return tokenizer.TryRead(Character);
+            return TryParseSequence(tokenizer, DecimalDigit.Instance, 1, int.MaxValue).HasValue;
         }
     }
 }

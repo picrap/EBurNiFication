@@ -2,7 +2,7 @@
 
 namespace Eburnification.Symbols
 {
-    public class ConcatenateSymbol : CharCharacterSymbol
+    public class ConcatenateSymbol : CharCharacterSymbol<ConcatenateSymbol>
     {
         protected override char Character => ',';
     }

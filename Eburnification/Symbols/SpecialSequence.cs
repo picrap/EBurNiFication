@@ -4,14 +4,13 @@ namespace Eburnification.Symbols
 {
     using Parser;
 
-    public abstract class CharCharacterSymbol<TSymbol> : Symbol<TSymbol>
-        where TSymbol : Symbol<TSymbol>, new()
+    public class SpecialSequence : Symbol<SpecialSequence>
     {
-        protected abstract char Character { get; }
-
         public override bool TryParse(Tokenizer tokenizer)
         {
-            return tokenizer.TryRead(Character);
+            // the ISO defines it for extension, so in this strict use, 
+            // we'll never get a special-sequence
+            return false;
         }
     }
 }

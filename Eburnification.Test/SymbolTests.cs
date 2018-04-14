@@ -14,8 +14,7 @@ namespace Eburnification.Test
         {
             var s = "'dude'";
             Tokenizer tp = new TextTokenizer(s);
-            var ts = new TerminalString();
-            Assert.IsTrue(ts.TryParse(tp));
+            Assert.IsTrue(TerminalString.Instance.TryParse(tp));
         }
 
         [TestMethod]
@@ -23,8 +22,7 @@ namespace Eburnification.Test
         {
             var s = "'unfinished business";
             Tokenizer tp = new TextTokenizer(s);
-            var ts = new TerminalString();
-            Assert.IsFalse(ts.TryParse(tp));
+            Assert.IsFalse(TerminalString.Instance.TryParse(tp));
         }
 
         [TestMethod]
@@ -32,8 +30,7 @@ namespace Eburnification.Test
         {
             var s = "\"double dude\"";
             Tokenizer tp = new TextTokenizer(s);
-            var ts = new TerminalString();
-            Assert.IsTrue(ts.TryParse(tp));
+            Assert.IsTrue(TerminalString.Instance.TryParse(tp));
         }
 
         [TestMethod]
@@ -41,8 +38,39 @@ namespace Eburnification.Test
         {
             var s = "\"unfinished double business";
             Tokenizer tp = new TextTokenizer(s);
-            var ts = new TerminalString();
-            Assert.IsFalse(ts.TryParse(tp));
+            Assert.IsFalse(TerminalString.Instance.TryParse(tp));
+        }
+
+        [TestMethod]
+        public void ValidInteger()
+        {
+            var s = "1234";
+            Tokenizer tp = new TextTokenizer(s);
+            Assert.IsTrue(Integer.Instance.TryParse(tp));
+        }
+
+        [TestMethod]
+        public void ValidIntegerWithTrailing()
+        {
+            var s = "5678a";
+            Tokenizer tp = new TextTokenizer(s);
+            Assert.IsTrue(Integer.Instance.TryParse(tp));
+        }
+
+        [TestMethod]
+        public void InvalidIntegerWithTrailing()
+        {
+            var s = "ijk";
+            Tokenizer tp = new TextTokenizer(s);
+            Assert.IsFalse(Integer.Instance.TryParse(tp));
+        }
+
+        [TestMethod]
+        public void MetaIdentifierIntegerWithTrailing()
+        {
+            var s = "q1";
+            Tokenizer tp = new TextTokenizer(s);
+            Assert.IsTrue(MetaIdentifier.Instance.TryParse(tp));
         }
     }
 }

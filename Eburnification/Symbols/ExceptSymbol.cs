@@ -2,8 +2,8 @@
 
 namespace Eburnification.Symbols
 {
-    public class FirstQuoteSymbol : CharCharacterSymbol<FirstQuoteSymbol>
+    public class ExceptSymbol : CharCharacterSymbol<ExceptSymbol>
     {
-        protected override char Character => '\'';
+        protected override char Character => '-';
     }
 }

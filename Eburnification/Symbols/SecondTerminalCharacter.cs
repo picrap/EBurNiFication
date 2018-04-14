@@ -4,7 +4,7 @@ namespace Eburnification.Symbols
 {
     using Parser;
 
-    public class SecondTerminalCharacter : Symbol
+    public class SecondTerminalCharacter : Symbol<SecondTerminalCharacter>
     {
         public override bool TryParse(Tokenizer tokenizer)
         {

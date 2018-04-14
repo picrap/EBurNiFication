@@ -58,4 +58,26 @@ namespace Eburnification.Symbols
             return null;
         }
     }
+
+    public abstract class Symbol<TSymbol> : Symbol
+        where TSymbol : Symbol<TSymbol>, new()
+    {
+        private static TSymbol _instance;
+
+        /// <summary>
+        /// Gets a default instance.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
+        public static TSymbol Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new TSymbol();
+                return _instance;
+            }
+        }
+    }
 }

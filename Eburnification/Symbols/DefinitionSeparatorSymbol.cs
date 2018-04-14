@@ -4,14 +4,11 @@ namespace Eburnification.Symbols
 {
     using Parser;
 
-    public abstract class CharCharacterSymbol<TSymbol> : Symbol<TSymbol>
-        where TSymbol : Symbol<TSymbol>, new()
+    public class DefinitionSeparatorSymbol : Symbol<DefinitionSeparatorSymbol>
     {
-        protected abstract char Character { get; }
-
         public override bool TryParse(Tokenizer tokenizer)
         {
-            return tokenizer.TryRead(Character);
+            return tokenizer.TryRead('|') || tokenizer.TryRead('/') || tokenizer.TryRead('!');
         }
     }
 }

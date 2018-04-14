@@ -2,8 +2,8 @@
 
 namespace Eburnification.Symbols
 {
-    public class TerminatorSymbol : CharCharacterSymbol<TerminatorSymbol>
+    public class StartCommentSymbol : StringCharacterSymbol<StartCommentSymbol>
     {
-        protected override char Character => ';';
+        protected override string Character => "(*";
     }
 }

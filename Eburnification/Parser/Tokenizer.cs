@@ -16,10 +16,12 @@ namespace Eburnification.Parser
         public abstract TokenizerState State { get; set; }
 
         public abstract char? Peek(int offset);
+        public virtual char? Peek() => Peek(0);
         public abstract void Next(int step);
         public virtual void Next() => Next(1);
 
-        public virtual char? Current => Peek(0);
+        // TODO: remove?
+        public virtual char? Current => Peek();
 
         public virtual char? ReadNext()
         {

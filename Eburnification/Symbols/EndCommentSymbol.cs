@@ -2,8 +2,8 @@
 
 namespace Eburnification.Symbols
 {
-    public class DefinitionSymbol : CharCharacterSymbol
+    public class EndCommentSymbol : StringCharacterSymbol<EndCommentSymbol>
     {
-        protected override char Character => '=';
+        protected override string Character => "*)";
     }
 }

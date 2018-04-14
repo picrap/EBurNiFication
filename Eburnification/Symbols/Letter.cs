@@ -4,14 +4,11 @@ namespace Eburnification.Symbols
 {
     using Parser;
 
-    public abstract class CharCharacterSymbol<TSymbol> : Symbol<TSymbol>
-        where TSymbol : Symbol<TSymbol>, new()
+    public class Letter : Symbol<Letter>
     {
-        protected abstract char Character { get; }
-
         public override bool TryParse(Tokenizer tokenizer)
         {
-            return tokenizer.TryRead(Character);
+            return tokenizer.TryRead(char.IsLetter);
         }
     }
 }

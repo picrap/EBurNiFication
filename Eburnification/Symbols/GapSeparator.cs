@@ -4,7 +4,7 @@ namespace Eburnification.Symbols
 {
     using Parser;
 
-    public class GapSeparator : Symbol
+    public class GapSeparator : Symbol<GapSeparator>
     {
         public override bool TryParse(Tokenizer tokenizer)
         {

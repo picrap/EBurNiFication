@@ -2,7 +2,7 @@
 
 namespace Eburnification.Symbols
 {
-    public class SecondQuoteSymbol : CharCharacterSymbol
+    public class SecondQuoteSymbol : CharCharacterSymbol<SecondQuoteSymbol>
     {
         protected override char Character => '"';
     }
