@@ -8,7 +8,7 @@ namespace Eburnification.Symbols
     public abstract class Symbol
     {
         /// <summary>
-        /// Tries to parse symbol from current tokenizer.
+        ///     Tries to parse symbol from current tokenizer.
         /// </summary>
         /// <param name="tokenizer">The tokenizer.</param>
         /// <returns></returns>
@@ -56,98 +56,6 @@ namespace Eburnification.Symbols
 
             tokenizer.State = s;
             return null;
-        }
-    }
-
-    public abstract class CharCharacterSymbol : Symbol
-    {
-        protected abstract char Character { get; }
-
-        public override bool TryParse(Tokenizer tokenizer)
-        {
-            return tokenizer.TryRead(Character);
-        }
-    }
-
-    public class DefinitionSymbol : CharCharacterSymbol
-    {
-        protected override char Character => '=';
-    }
-
-    public class ConcatenateSymbol : CharCharacterSymbol
-    {
-        protected override char Character => ',';
-    }
-
-    public class TerminatorSymbol : CharCharacterSymbol
-    {
-        protected override char Character => ';';
-    }
-
-    public class FirstQuoteSymbol : CharCharacterSymbol
-    {
-        protected override char Character => '\'';
-    }
-
-    public class SecondQuoteSymbol : CharCharacterSymbol
-    {
-        protected override char Character => '"';
-    }
-
-    public class GapSeparator : Symbol
-    {
-        public override bool TryParse(Tokenizer tokenizer)
-        {
-            while (tokenizer.TryRead(" ") || tokenizer.TryRead("\t") || tokenizer.TryRead("\n")
-                   || tokenizer.TryRead("\r\n") || tokenizer.TryRead("\r"))
-            {
-            }
-
-            return true;
-        }
-    }
-
-    public class FirstTerminalCharacter : Symbol
-    {
-        public override bool TryParse(Tokenizer tokenizer)
-        {
-            return tokenizer.TryRead(c => c != '\'');
-        }
-    }
-
-    public class SecondTerminalCharacter : Symbol
-    {
-        public override bool TryParse(Tokenizer tokenizer)
-        {
-            return tokenizer.TryRead(c => c != '\"');
-        }
-    }
-
-    public class TerminalString : Symbol
-    {
-        private readonly FirstQuoteSymbol _firstQuoteSymbol = new FirstQuoteSymbol();
-        private readonly SecondQuoteSymbol _secondQuoteSymbol = new SecondQuoteSymbol();
-        private readonly FirstTerminalCharacter _firstTerminalCharacter = new FirstTerminalCharacter();
-        private readonly SecondTerminalCharacter _secondTerminalCharacter = new SecondTerminalCharacter();
-
-        public override bool TryParse(Tokenizer tokenizer)
-        {
-            return TryParse(tokenizer, TryParseFirstTerminalString)
-                   || TryParse(tokenizer, TryParseSecondTerminalString);
-        }
-
-        private bool TryParseFirstTerminalString(Tokenizer tokenizer)
-        {
-            return _firstQuoteSymbol.TryParse(tokenizer)
-                   && TryParseSequence(tokenizer, _firstTerminalCharacter).HasValue
-                   && _firstQuoteSymbol.TryParse(tokenizer);
-        }
-
-        private bool TryParseSecondTerminalString(Tokenizer tokenizer)
-        {
-            return _secondQuoteSymbol.TryParse(tokenizer)
-                   && TryParseSequence(tokenizer, _secondTerminalCharacter).HasValue
-                   && _secondQuoteSymbol.TryParse(tokenizer);
         }
     }
 }
