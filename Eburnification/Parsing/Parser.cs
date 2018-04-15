@@ -20,6 +20,8 @@ namespace Eburnification.Parsing
         public abstract void Next(int step);
         public virtual void Next() => Next(1);
 
+        public virtual bool IsEnd => Peek() == null;
+
         // TODO: remove?
         public virtual char? Current => Peek();
 
@@ -59,5 +61,12 @@ namespace Eburnification.Parsing
         /// <param name="state">The state.</param>
         /// <returns></returns>
         public abstract string GetCapture(ParserState state);
+
+        /// <summary>
+        /// Creates the parser.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns></returns>
+        public abstract Parser CreateParser(string text);
     }
 }

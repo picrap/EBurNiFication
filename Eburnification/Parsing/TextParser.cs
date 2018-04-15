@@ -54,5 +54,10 @@ namespace Eburnification.Parsing
             var capture = _text.Substring(cursor, _cursor - cursor);
             return capture;
         }
+
+        public override Parser CreateParser(string text)
+        {
+            return new TextParser(text);
+        }
     }
 }

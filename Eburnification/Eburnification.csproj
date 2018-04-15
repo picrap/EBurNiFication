@@ -75,6 +75,7 @@
     <Compile Include="Symbols\StartRepeatSymbol.cs" />
     <Compile Include="Symbols\StringCharacterSymbol.cs" />
     <Compile Include="Symbols\Symbol.cs" />
+    <Compile Include="Symbols\SyntacticException.cs" />
     <Compile Include="Symbols\TerminalCharacter.cs" />
     <Compile Include="Symbols\TerminalString.cs" />
     <Compile Include="Symbols\TerminatorSymbol.cs" />

@@ -111,5 +111,31 @@ namespace Eburnification.Parsing
         {
             return ParseAll(parser, GetQuoteSequenceTokens(parser, startSymbol, terminalCharacter, endSymbol));
         }
+
+        /// <summary>
+        /// Parses a symbol, only if it excludes another symbol.
+        /// </summary>
+        /// <param name="parser">The parser.</param>
+        /// <param name="includeSymbol">The include symbol.</param>
+        /// <param name="exceptSymbol">The except symbol.</param>
+        /// <returns></returns>
+        public Token ParseException(Parser parser, Symbol includeSymbol, Symbol exceptSymbol)
+        {
+            var state = parser.State;
+
+            var includedToken = Parse(parser, includeSymbol);
+            if (includedToken == null)
+                return null;
+
+            var innerParser = parser.CreateParser(includedToken.Value);
+            var excludedToken = Parse(innerParser, exceptSymbol);
+            if (excludedToken != null && innerParser.IsEnd)
+            {
+                parser.State = state;
+                return null;
+            }
+
+            return includedToken;
+        }
     }
 }
