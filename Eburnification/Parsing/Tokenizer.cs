@@ -124,7 +124,7 @@ namespace Eburnification.Parsing
             if (includedToken.IsNone)
                 return AnyToken.None;
 
-            var innerParser = parser.CreateParser(parser.GetCapture(state));
+            var innerParser = parser.CreateSubParser(state);
             var excludedToken = Parse(innerParser, exceptSymbol);
             if (!excludedToken.IsNone && innerParser.IsEnd)
             {

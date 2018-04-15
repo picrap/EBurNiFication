@@ -4,6 +4,10 @@ namespace Eburnification.Parsing
 {
     using System.Diagnostics;
 
+    /// <summary>
+    /// Implementation of <see cref="Parser"/> for text
+    /// </summary>
+    /// <seealso cref="Eburnification.Parsing.Parser" />
     [DebuggerDisplay("{" + nameof(Debug) + "}")]
     public class TextParser : Parser
     {
@@ -26,13 +30,18 @@ namespace Eburnification.Parsing
         public override ParserState State
         {
             get { return new TextParserState(_cursor); }
-            set { _cursor = ((TextParserState)value).Cursor; }
+            set { _cursor = GetTextParserState(value).Cursor; }
         }
 
         public TextParser(string text, int cursor = 0)
         {
             _text = text;
             _cursor = cursor;
+        }
+
+        private static TextParserState GetTextParserState(ParserState value)
+        {
+            return (TextParserState)value;
         }
 
         public override char? Peek(int offset)
@@ -50,14 +59,14 @@ namespace Eburnification.Parsing
 
         public override string GetCapture(ParserState state)
         {
-            var cursor = ((TextParserState)state).Cursor;
+            var cursor = GetTextParserState(state).Cursor;
             var capture = _text.Substring(cursor, _cursor - cursor);
             return capture;
         }
 
-        public override Parser CreateParser(string text)
+        public override Parser CreateSubParser(ParserState from)
         {
-            return new TextParser(text);
+            return new TextParser(_text,GetTextParserState(from).Cursor);
         }
     }
 }

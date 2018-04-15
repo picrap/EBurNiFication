@@ -23,7 +23,7 @@ namespace Eburnification.Symbols
             if (anyToken.IsNone)
                 return AnyToken.None;
 
-            var textParser = parser.CreateParser(parser.GetCapture(state));
+            var textParser = parser.CreateSubParser(state);
             if (!tokenizer.ParseAny(textParser, FirstQuoteSymbol.Instance, SecondQuoteSymbol.Instance).IsNone && textParser.Peek() == null)
             {
                 parser.State = state;
