@@ -10,9 +10,9 @@ namespace Eburnification.Symbols
     /// </summary>
     public class TerminalCharacter : Symbol<TerminalCharacter>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return ToTokens(tokenizer.ParseAny(parser,
+            return tokenizer.ParseAny(parser,
                 Letter.Instance, // a
                 DecimalDigit.Instance, // b
                 ConcatenateSymbol.Instance, // c
@@ -33,7 +33,7 @@ namespace Eburnification.Symbols
                 StartRepeatSymbol.Instance, // r
                 TerminatorSymbol.Instance, // s
                 OtherCharacter.Instance // t
-            ));
+            );
         }
     }
 }

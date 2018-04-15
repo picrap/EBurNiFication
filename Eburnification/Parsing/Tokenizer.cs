@@ -8,54 +8,55 @@ namespace Eburnification.Parsing
 
     public class Tokenizer
     {
-        public Token Parse(Parser parser, Symbol symbol)
+        public AnyToken Parse(Parser parser, Symbol symbol)
         {
             var state = parser.State;
 
-            var tokens = symbol.TryParse(this, parser);
-            if (tokens == null)
-                return null;
+            var anyToken = symbol.TryParse(this, parser);
+            if (anyToken.IsNone)
+                return anyToken;
 
             var capture = parser.GetCapture(state);
-            return new Token(symbol, capture, tokens);
+
+            return new Token(symbol, capture, anyToken.Tokens);
         }
 
-        public Token[] ParseAll(Parser parser, IEnumerable<Token> tokens)
+        public AnyToken ParseAll(Parser parser, IEnumerable<AnyToken> anyTokens)
         {
             var state = parser.State;
 
-            var resulTokens = new List<Token>();
-            foreach (var token in tokens)
+            var tokens = new List<Token>();
+            foreach (var anyToken in anyTokens)
             {
-                if (token == null)
+                if (anyToken.IsNone)
                 {
                     parser.State = state;
-                    return null;
+                    return AnyToken.None;
                 }
-                resulTokens.Add(token);
+                tokens.AddRange(anyToken.Tokens);
             }
 
-            return resulTokens.ToArray();
+            return tokens.ToArray();
         }
 
-        public Token[] ParseAll(Parser parser, params Symbol[] symbols)
+        public AnyToken ParseAll(Parser parser, params Symbol[] symbols)
         {
             return ParseAll(parser, symbols.Select(s => Parse(parser, s)));
         }
 
-        public Token ParseAny(Parser parser, params Symbol[] symbols)
+        public AnyToken ParseAny(Parser parser, params Symbol[] symbols)
         {
             foreach (var symbol in symbols)
             {
                 var token = Parse(parser, symbol);
-                if (token != null)
+                if (!token.IsNone)
                     return token;
             }
 
-            return null;
+            return AnyToken.None;
         }
 
-        public IList<Token> ParseSequence(Parser parser, Symbol symbol, int max, bool strict = true)
+        public AnyToken ParseSequence(Parser parser, Symbol symbol, int max, bool strict = true)
         {
             var state = parser.State;
 
@@ -65,49 +66,45 @@ namespace Eburnification.Parsing
             for (; count < max; count++)
             {
                 var token = Parse(parser, symbol);
-                if (token == null)
+                if (token.IsNone)
                     break;
-                tokens.Add(token);
+                tokens.AddRange(token.Tokens);
             }
 
             // if max is reached, see if there is nothing behind
             // (in strict mode)
             if (strict && count == max)
             {
-                if (Parse(parser, symbol) != null)
+                if (!Parse(parser, symbol).IsNone)
                 {
                     parser.State = state;
-                    return null;
+                    return AnyToken.None;
                 }
             }
 
             return tokens.ToArray();
         }
 
-        public IList<Token> ParseSequence(Parser parser, Symbol symbol, int min, int max, bool strict = true)
+        public AnyToken ParseSequence(Parser parser, Symbol symbol, int min, int max, bool strict = true)
         {
             var state = parser.State;
 
-            var tokens = ParseSequence(parser, symbol, max, strict);
-            if (tokens?.Count >= min)
-                return tokens;
+            var anyToken = ParseSequence(parser, symbol, max, strict);
+            if (anyToken.Tokens.Count >= min)
+                return anyToken;
 
             parser.State = state;
-            return null;
+            return AnyToken.None;
         }
 
-        private IEnumerable<Token> GetQuoteSequenceTokens(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
+        private IEnumerable<AnyToken> GetQuoteSequenceTokens(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
         {
             yield return Parse(parser, startSymbol);
-            var firstTerminalCharacters = ParseSequence(parser, terminalCharacter, int.MaxValue);
-            if (firstTerminalCharacters == null)
-                yield break;
-            foreach (var token in firstTerminalCharacters)
-                yield return token;
+            yield return ParseSequence(parser, terminalCharacter, int.MaxValue);
             yield return Parse(parser, endSymbol);
         }
 
-        public IList<Token> ParseQuoteSequence(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
+        public AnyToken ParseQuoteSequence(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
         {
             return ParseAll(parser, GetQuoteSequenceTokens(parser, startSymbol, terminalCharacter, endSymbol));
         }
@@ -119,20 +116,20 @@ namespace Eburnification.Parsing
         /// <param name="includeSymbol">The include symbol.</param>
         /// <param name="exceptSymbol">The except symbol.</param>
         /// <returns></returns>
-        public Token ParseException(Parser parser, Symbol includeSymbol, Symbol exceptSymbol)
+        public AnyToken ParseException(Parser parser, Symbol includeSymbol, Symbol exceptSymbol)
         {
             var state = parser.State;
 
             var includedToken = Parse(parser, includeSymbol);
-            if (includedToken == null)
-                return null;
+            if (includedToken.IsNone)
+                return AnyToken.None;
 
-            var innerParser = parser.CreateParser(includedToken.Value);
+            var innerParser = parser.CreateParser(parser.GetCapture(state));
             var excludedToken = Parse(innerParser, exceptSymbol);
-            if (excludedToken != null && innerParser.IsEnd)
+            if (!excludedToken.IsNone && innerParser.IsEnd)
             {
                 parser.State = state;
-                return null;
+                return AnyToken.None;
             }
 
             return includedToken;

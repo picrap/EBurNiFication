@@ -7,7 +7,7 @@ namespace Eburnification.Symbols
 
     public class DefinitionSeparatorSymbol : Symbol<DefinitionSeparatorSymbol>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
             return ToTokens(parser.TryRead('|') || parser.TryRead('/') || parser.TryRead('!'));
         }

@@ -2,7 +2,6 @@
 
 namespace Eburnification.Test
 {
-    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Parsing;
     using Symbols;
@@ -16,7 +15,7 @@ namespace Eburnification.Test
             var s = "'dude'";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, TerminalString.Instance);
+            var token = tokenizer.Parse(parser, TerminalString.Instance).Token;
             Assert.IsNotNull(token);
             Assert.IsTrue(token.Symbol is TerminalString);
             Assert.AreEqual(s, token.Value);
@@ -28,7 +27,7 @@ namespace Eburnification.Test
             var s = "'unfinished business";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, TerminalString.Instance);
+            var token = tokenizer.Parse(parser, TerminalString.Instance).Token;
             Assert.IsNull(token);
         }
 
@@ -38,7 +37,7 @@ namespace Eburnification.Test
             var s = "\"double dude\"";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, TerminalString.Instance);
+            var token = tokenizer.Parse(parser, TerminalString.Instance).Token;
             Assert.IsNotNull(token);
             Assert.IsTrue(token.Symbol is TerminalString);
             Assert.AreEqual(s, token.Value);
@@ -50,7 +49,7 @@ namespace Eburnification.Test
             var s = "\"unfinished double business";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, TerminalString.Instance);
+            var token = tokenizer.Parse(parser, TerminalString.Instance).Token;
             Assert.IsNull(token);
         }
 
@@ -60,7 +59,7 @@ namespace Eburnification.Test
             var s = "1234";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, Integer.Instance);
+            var token = tokenizer.Parse(parser, Integer.Instance).Token;
             Assert.IsNotNull(token);
             Assert.IsTrue(token.Symbol is Integer);
             Assert.AreEqual(s, token.Value);
@@ -72,7 +71,7 @@ namespace Eburnification.Test
             var s = "5678a";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, Integer.Instance);
+            var token = tokenizer.Parse(parser, Integer.Instance).Token;
             Assert.IsNotNull(token);
             Assert.IsTrue(token.Symbol is Integer);
             Assert.AreEqual("5678", token.Value);
@@ -84,7 +83,7 @@ namespace Eburnification.Test
             var s = "ijk";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, Integer.Instance);
+            var token = tokenizer.Parse(parser, Integer.Instance).Token;
             Assert.IsNull(token);
         }
 
@@ -94,7 +93,7 @@ namespace Eburnification.Test
             var s = "q1";
             Parser parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, MetaIdentifier.Instance);
+            var token = tokenizer.Parse(parser, MetaIdentifier.Instance).Token;
             Assert.IsNotNull(token);
             Assert.IsTrue(token.Symbol is MetaIdentifier);
             Assert.AreEqual(s, token.Value);

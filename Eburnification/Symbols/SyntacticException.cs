@@ -21,9 +21,9 @@ namespace Eburnification.Symbols
             _excluded = excluded;
         }
 
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return ToTokens(tokenizer.ParseException(parser, _included, _excluded));
+            return tokenizer.ParseException(parser, _included, _excluded);
         }
     }
 }

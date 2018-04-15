@@ -2,7 +2,6 @@
 
 namespace Eburnification.Symbols
 {
-    using System.Collections.Generic;
     using Parsing;
 
     /// <summary>
@@ -10,26 +9,28 @@ namespace Eburnification.Symbols
     /// </summary>
     public class GapFreeSymbol : Symbol<GapFreeSymbol>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return ToTokens(TryParseTerminalNoQuote(tokenizer, parser)
-                            ?? tokenizer.Parse(parser, TerminalString.Instance));
+            return TryParseTerminalNoQuote(tokenizer, parser)
+                   ^ (() => tokenizer.Parse(parser, TerminalString.Instance));
         }
 
-        private static Token TryParseTerminalNoQuote(Tokenizer tokenizer, Parser parser)
+        private static AnyToken TryParseTerminalNoQuote(Tokenizer tokenizer, Parser parser)
         {
             var state = parser.State;
-            var token = tokenizer.Parse(parser, TerminalCharacter.Instance);
-            if (token == null)
-                return null;
-            var textParser = new TextParser(token.Value);
-            if (tokenizer.ParseAny(textParser, FirstQuoteSymbol.Instance, SecondQuoteSymbol.Instance) != null && textParser.Peek() == null)
+
+            var anyToken = tokenizer.Parse(parser, TerminalCharacter.Instance);
+            if (anyToken.IsNone)
+                return AnyToken.None;
+
+            var textParser = parser.CreateParser(parser.GetCapture(state));
+            if (!tokenizer.ParseAny(textParser, FirstQuoteSymbol.Instance, SecondQuoteSymbol.Instance).IsNone && textParser.Peek() == null)
             {
                 parser.State = state;
-                return null;
+                return AnyToken.None;
             }
 
-            return token;
+            return anyToken;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Eburnification.Symbols
 
     public class MetaIdentifierCharacter : Symbol<MetaIdentifierCharacter>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
             return ToTokens(parser.TryRead(char.IsLetterOrDigit));
         }

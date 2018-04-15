@@ -7,7 +7,7 @@ namespace Eburnification.Symbols
 
     public class Integer : Symbol<Integer>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseSequence(parser, DecimalDigit.Instance, 1, int.MaxValue);
         }

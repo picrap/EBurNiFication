@@ -19,18 +19,16 @@ namespace Eburnification.Symbols
         /// <param name="tokenizer"></param>
         /// <param name="parser">The tokenizer.</param>
         /// <returns></returns>
-        public abstract IList<Token> TryParse(Tokenizer tokenizer, Parser parser);
+        public abstract AnyToken TryParse(Tokenizer tokenizer, Parser parser);
 
-        protected static IList<Token> ToTokens(Token token)
+        protected static AnyToken ToTokens(Token token)
         {
-            if (token == null)
-                return null;
-            return new[] { token };
+            return token;
         }
 
-        protected static IList<Token> ToTokens(bool singleResult)
+        protected static AnyToken ToTokens(bool singleResult)
         {
-            return singleResult ? NoToken : null;
+            return singleResult ? AnyToken.Empty : AnyToken.None;
         }
     }
 

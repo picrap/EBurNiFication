@@ -35,6 +35,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parsing\AnyToken.cs" />
     <Compile Include="Parsing\TextParser.cs" />
     <Compile Include="Parsing\TextParserState.cs" />
     <Compile Include="Parsing\Token.cs" />

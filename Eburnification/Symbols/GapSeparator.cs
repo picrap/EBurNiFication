@@ -10,7 +10,7 @@ namespace Eburnification.Symbols
     /// </summary>
     public class GapSeparator : Symbol<GapSeparator>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
             while (parser.TryRead(" ") || parser.TryRead("\t") || parser.TryRead("\n")
                    || parser.TryRead("\r\n") || parser.TryRead("\r"))

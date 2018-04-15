@@ -7,7 +7,7 @@ namespace Eburnification.Symbols
 
     public class BracketedTextualComment : Symbol<BracketedTextualComment>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseQuoteSequence(parser, StartCommentSymbol.Instance, CommentSymbol.Instance, EndCommentSymbol.Instance);
         }

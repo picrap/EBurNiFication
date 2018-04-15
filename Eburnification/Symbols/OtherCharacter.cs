@@ -10,7 +10,7 @@ namespace Eburnification.Symbols
     {
         private static readonly IEnumerable<char> OtherCharacters = " .:!+_%@&#$<>/\\~^";
 
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
             return ToTokens(parser.TryRead(c => OtherCharacters.Contains(c)));
         }

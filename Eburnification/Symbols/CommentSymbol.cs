@@ -10,13 +10,13 @@ namespace Eburnification.Symbols
     /// </summary>
     public class CommentSymbol : Symbol<CommentSymbol>
     {
-        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
+        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return ToTokens(tokenizer.ParseAny(parser,
+            return tokenizer.ParseAny(parser,
                 BracketedTextualComment.Instance,
                 CommentlessSymbol.Instance,
                 OtherCharacter.Instance
-            ));
+            );
         }
     }
 }
