@@ -9,7 +9,7 @@ namespace Eburnification.Symbols
     {
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead('|') || parser.TryRead('/') || parser.TryRead('!') ? NoToken() : null;
+            return ToTokens(parser.TryRead('|') || parser.TryRead('/') || parser.TryRead('!'));
         }
     }
 }

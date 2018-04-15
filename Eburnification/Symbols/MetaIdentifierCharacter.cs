@@ -9,7 +9,7 @@ namespace Eburnification.Symbols
     {
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead(char.IsLetterOrDigit) ? NoToken() : null;
+            return ToTokens(parser.TryRead(char.IsLetterOrDigit));
         }
     }
 }

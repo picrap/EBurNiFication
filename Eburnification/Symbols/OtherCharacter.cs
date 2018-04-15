@@ -12,7 +12,7 @@ namespace Eburnification.Symbols
 
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead(c => OtherCharacters.Contains(c)) ? NoToken() : null;
+            return ToTokens(parser.TryRead(c => OtherCharacters.Contains(c)));
         }
     }
 }

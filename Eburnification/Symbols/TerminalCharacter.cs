@@ -9,7 +9,7 @@ namespace Eburnification.Symbols
     {
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return ToTokens(tokenizer.ParseAny(parser, 
+            return ToTokens(tokenizer.ParseAny(parser,
                 Letter.Instance, // a
                 DecimalDigit.Instance, // b
                 ConcatenateSymbol.Instance, // c
