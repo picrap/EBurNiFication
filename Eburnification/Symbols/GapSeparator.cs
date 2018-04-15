@@ -2,18 +2,19 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class GapSeparator : Symbol<GapSeparator>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
             while (parser.TryRead(" ") || parser.TryRead("\t") || parser.TryRead("\n")
                    || parser.TryRead("\r\n") || parser.TryRead("\r"))
             {
             }
 
-            return true;
+            return NoToken();
         }
     }
 }

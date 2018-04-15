@@ -2,15 +2,16 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class SpecialSequence : Symbol<SpecialSequence>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
             // the ISO defines it for extension, so in this strict use, 
             // we'll never get a special-sequence
-            return false;
+            return null;
         }
     }
 }

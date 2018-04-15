@@ -1,5 +1,6 @@
 ﻿namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public abstract class StringCharacterSymbol<TSymbol> : Symbol<TSymbol>
@@ -7,9 +8,9 @@
     {
         protected abstract string Character { get; }
 
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead(Character);
+            return parser.TryRead(Character) ? NoToken() : null;
         }
     }
 }

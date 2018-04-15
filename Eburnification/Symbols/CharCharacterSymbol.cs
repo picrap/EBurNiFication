@@ -2,6 +2,7 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public abstract class CharCharacterSymbol<TSymbol> : Symbol<TSymbol>
@@ -9,9 +10,9 @@ namespace Eburnification.Symbols
     {
         protected abstract char Character { get; }
 
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead(Character);
+            return parser.TryRead(Character) ? NoToken() : null;
         }
     }
 }

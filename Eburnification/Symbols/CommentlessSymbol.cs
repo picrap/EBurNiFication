@@ -2,17 +2,20 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class CommentlessSymbol : Symbol<CommentlessSymbol>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return TerminalCharacter.Instance.TryParse(parser)
-                   || MetaIdentifier.Instance.TryParse(parser)
-                   || Integer.Instance.TryParse(parser)
-                   || TerminalString.Instance.TryParse(parser)
-                   || SpecialSequence.Instance.TryParse(parser);
+            return ToTokens(tokenizer.ParseAny(parser,
+                TerminalCharacter.Instance,
+                MetaIdentifier.Instance,
+                Integer.Instance,
+                TerminalString.Instance,
+                SpecialSequence.Instance
+            ));
         }
     }
 }

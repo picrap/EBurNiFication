@@ -2,13 +2,14 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class Integer : Symbol<Integer>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return TryParseSequence(parser, DecimalDigit.Instance, 1, int.MaxValue).HasValue;
+            return tokenizer.ParseSequence(parser, DecimalDigit.Instance, 1, int.MaxValue);
         }
     }
 }

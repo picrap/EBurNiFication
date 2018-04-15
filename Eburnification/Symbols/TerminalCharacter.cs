@@ -2,33 +2,35 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class TerminalCharacter : Symbol<TerminalCharacter>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return Letter.Instance.TryParse(parser) // a
-                   || DecimalDigit.Instance.TryParse(parser) // b
-                   || ConcatenateSymbol.Instance.TryParse(parser) // c
-                   || DefiningSymbol.Instance.TryParse(parser) // d
-                   || DefinitionSeparatorSymbol.Instance.TryParse(parser) // e
-                   || EndCommentSymbol.Instance.TryParse(parser) // f
-                   || EndGroupSymbol.Instance.TryParse(parser) // g
-                   || EndOptionSymbol.Instance.TryParse(parser) // h
-                   || EndRepeatSymbol.Instance.TryParse(parser) // i
-                   || ExceptSymbol.Instance.TryParse(parser) // j
-                   || FirstQuoteSymbol.Instance.TryParse(parser) // k
-                   || RepetitionSymbol.Instance.TryParse(parser) // l
-                   || SecondQuoteSymbol.Instance.TryParse(parser) // m
-                   || SpecialSequenceSymbol.Instance.TryParse(parser) // n
-                   || StartCommentSymbol.Instance.TryParse(parser) // o
-                   || StartGroupSymbol.Instance.TryParse(parser) // p
-                   || StartOptionSymbol.Instance.TryParse(parser) // q
-                   || StartRepeatSymbol.Instance.TryParse(parser) // r
-                   || TerminatorSymbol.Instance.TryParse(parser) // s
-                   || OtherCharacter.Instance.TryParse(parser) // t
-                ;
+            return ToTokens(tokenizer.ParseAny(parser, 
+                Letter.Instance, // a
+                DecimalDigit.Instance, // b
+                ConcatenateSymbol.Instance, // c
+                DefiningSymbol.Instance, // d
+                DefinitionSeparatorSymbol.Instance, // e
+                EndCommentSymbol.Instance, // f
+                EndGroupSymbol.Instance, // g
+                EndOptionSymbol.Instance, // h
+                EndRepeatSymbol.Instance, // i
+                ExceptSymbol.Instance, // j
+                FirstQuoteSymbol.Instance, // k
+                RepetitionSymbol.Instance, // l
+                SecondQuoteSymbol.Instance, // m
+                SpecialSequenceSymbol.Instance, // n
+                StartCommentSymbol.Instance, // o
+                StartGroupSymbol.Instance, // p
+                StartOptionSymbol.Instance, // q
+                StartRepeatSymbol.Instance, // r
+                TerminatorSymbol.Instance, // s
+                OtherCharacter.Instance // t
+            ));
         }
     }
 }

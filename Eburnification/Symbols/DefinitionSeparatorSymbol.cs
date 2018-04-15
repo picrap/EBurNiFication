@@ -2,13 +2,14 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class DefinitionSeparatorSymbol : Symbol<DefinitionSeparatorSymbol>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead('|') || parser.TryRead('/') || parser.TryRead('!');
+            return parser.TryRead('|') || parser.TryRead('/') || parser.TryRead('!') ? NoToken() : null;
         }
     }
 }

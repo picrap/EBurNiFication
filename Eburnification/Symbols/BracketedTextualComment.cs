@@ -2,20 +2,14 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class BracketedTextualComment : Symbol<BracketedTextualComment>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return TryParse(parser, TryParseBracketedTextualComment);
-        }
-
-        private bool TryParseBracketedTextualComment(Parser parser)
-        {
-            return StartCommentSymbol.Instance.TryParse(parser)
-                   && TryParseSequence(parser, CommentSymbol.Instance, 0, int.MaxValue).HasValue
-                   && EndCommentSymbol.Instance.TryParse(parser);
+            return tokenizer.ParseQuoteSequence(parser, StartCommentSymbol.Instance, CommentSymbol.Instance, EndCommentSymbol.Instance);
         }
     }
 }

@@ -2,13 +2,14 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class SecondTerminalCharacter : Symbol<SecondTerminalCharacter>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead(c => c != '\"');
+            return parser.TryRead(c => c != '\"') ? NoToken() : null;
         }
     }
 }

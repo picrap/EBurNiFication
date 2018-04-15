@@ -2,28 +2,15 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class TerminalString : Symbol<TerminalString>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return TryParse(parser, TryParseFirstTerminalString)
-                   || TryParse(parser, TryParseSecondTerminalString);
-        }
-
-        private bool TryParseFirstTerminalString(Parser parser)
-        {
-            return FirstQuoteSymbol.Instance.TryParse(parser)
-                   && TryParseSequence(parser, FirstTerminalCharacter.Instance).HasValue
-                   && FirstQuoteSymbol.Instance.TryParse(parser);
-        }
-
-        private bool TryParseSecondTerminalString(Parser parser)
-        {
-            return SecondQuoteSymbol.Instance.TryParse(parser)
-                   && TryParseSequence(parser, SecondTerminalCharacter.Instance).HasValue
-                   && SecondQuoteSymbol.Instance.TryParse(parser);
+            return tokenizer.ParseQuoteSequence(parser, FirstQuoteSymbol.Instance, FirstTerminalCharacter.Instance, FirstQuoteSymbol.Instance)
+                   ?? tokenizer.ParseQuoteSequence(parser, SecondQuoteSymbol.Instance, SecondTerminalCharacter.Instance, SecondQuoteSymbol.Instance);
         }
     }
 }

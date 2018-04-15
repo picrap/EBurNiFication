@@ -2,13 +2,14 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class Letter : Symbol<Letter>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead(char.IsLetter);
+            return parser.TryRead(char.IsLetter) ? NoToken() : null;
         }
     }
 }

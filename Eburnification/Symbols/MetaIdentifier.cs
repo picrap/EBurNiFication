@@ -2,18 +2,19 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class MetaIdentifier : Symbol<MetaIdentifier>
     {
         private readonly MetaIdentifierCharacter _metaIdentifierCharacter = new MetaIdentifierCharacter();
 
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
             if (!parser.TryRead(char.IsLetter))
-                return false;
+                return null;
             // which is actually always true, since we ask for as many as we wantd
-            return TryParseSequence(parser, _metaIdentifierCharacter, 0, int.MaxValue).HasValue;
+            return tokenizer.ParseSequence(parser, _metaIdentifierCharacter, int.MaxValue);
         }
     }
 }

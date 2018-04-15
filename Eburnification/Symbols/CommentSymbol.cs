@@ -2,15 +2,18 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class CommentSymbol : Symbol<CommentSymbol>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return BracketedTextualComment.Instance.TryParse(parser)
-                   || CommentlessSymbol.Instance.TryParse(parser)
-                   || OtherCharacter.Instance.TryParse(parser);
+            return ToTokens(tokenizer.ParseAny(parser,
+                BracketedTextualComment.Instance,
+                CommentlessSymbol.Instance,
+                OtherCharacter.Instance
+            ));
         }
     }
 }

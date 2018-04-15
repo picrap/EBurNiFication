@@ -3,6 +3,7 @@
 namespace Eburnification.Symbols
 {
     using System;
+    using System.Collections.Generic;
     using Parsing;
 
     public abstract class Symbol
@@ -10,53 +11,30 @@ namespace Eburnification.Symbols
         /// <summary>
         ///     Tries to parse symbol from current tokenizer.
         /// </summary>
+        /// <param name="tokenizer"></param>
         /// <param name="parser">The tokenizer.</param>
         /// <returns></returns>
-        public abstract bool TryParse(Parser parser);
+        public abstract IList<Token> TryParse(Tokenizer tokenizer, Parser parser);
 
-        protected bool TryParse(Parser parser, Predicate<Parser> tryParse)
+        protected IList<Token> TryParse(Tokenizer tokenizer, Parser parser, Func<Tokenizer, Parser, IList<Token>> tryParse)
         {
-            var s = parser.State;
-            var result = tryParse(parser);
-            if (!result)
-                parser.State = s;
-            return result;
+            var state = parser.State;
+
+            var token = tryParse(tokenizer, parser);
+            if (token == null)
+                parser.State = state;
+
+            return token;
         }
 
-        protected int? TryParseSequence(Parser parser, Symbol symbol, int max = int.MaxValue, bool strict = true)
+        protected static Token[] ToTokens(Token token)
         {
-            int count = 0;
-            for (; count < max; count++)
-            {
-                var parsed = symbol.TryParse(parser);
-                if (!parsed)
-                    break;
-            }
-
-            // if max is reached, see if there is nothing behind
-            if (strict && count == max)
-            {
-                var s = parser.State;
-                if (symbol.TryParse(parser))
-                {
-                    parser.State = s;
-                    return null;
-                }
-            }
-
-            return count;
+            if (token == null)
+                return null;
+            return new[] { token };
         }
 
-        protected int? TryParseSequence(Parser parser, Symbol symbol, int min, int max, bool strict = true)
-        {
-            var s = parser.State;
-            var count = TryParseSequence(parser, symbol, max, strict);
-            if (count >= min)
-                return count;
-
-            parser.State = s;
-            return null;
-        }
+        protected static Token[] NoToken() => new Token[0];
     }
 
     public abstract class Symbol<TSymbol> : Symbol

@@ -2,13 +2,14 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections.Generic;
     using Parsing;
 
     public class DecimalDigit : Symbol<DecimalDigit>
     {
-        public override bool TryParse(Parser parser)
+        public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return parser.TryRead(char.IsDigit);
+            return parser.TryRead(char.IsDigit) ? NoToken() : null;
         }
     }
 }
