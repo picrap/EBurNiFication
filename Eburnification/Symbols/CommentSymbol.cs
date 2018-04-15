@@ -5,6 +5,9 @@ namespace Eburnification.Symbols
     using System.Collections.Generic;
     using Parsing;
 
+    /// <summary>
+    /// comment-symbol (§6.6)
+    /// </summary>
     public class CommentSymbol : Symbol<CommentSymbol>
     {
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)

@@ -5,6 +5,9 @@ namespace Eburnification.Symbols
     using System.Collections.Generic;
     using Parsing;
 
+    /// <summary>
+    /// gap-separator (§6.4)
+    /// </summary>
     public class GapSeparator : Symbol<GapSeparator>
     {
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)

@@ -5,6 +5,9 @@ namespace Eburnification.Symbols
     using System.Collections.Generic;
     using Parsing;
 
+    /// <summary>
+    /// terminal-character (§6.2)
+    /// </summary>
     public class TerminalCharacter : Symbol<TerminalCharacter>
     {
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)

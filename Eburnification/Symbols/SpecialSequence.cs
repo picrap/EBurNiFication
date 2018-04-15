@@ -5,6 +5,9 @@ namespace Eburnification.Symbols
     using System.Collections.Generic;
     using Parsing;
 
+    /// <summary>
+    /// special-sequence (§5.11)
+    /// </summary>
     public class SpecialSequence : Symbol<SpecialSequence>
     {
         public override IList<Token> TryParse(Tokenizer tokenizer, Parser parser)

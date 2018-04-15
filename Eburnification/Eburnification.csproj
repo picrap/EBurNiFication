@@ -57,6 +57,7 @@
     <Compile Include="Symbols\ExceptSymbol.cs" />
     <Compile Include="Symbols\FirstQuoteSymbol.cs" />
     <Compile Include="Symbols\FirstTerminalCharacter.cs" />
+    <Compile Include="Symbols\GapFreeSymbol.cs" />
     <Compile Include="Symbols\GapSeparator.cs" />
     <Compile Include="Symbols\Integer.cs" />
     <Compile Include="Symbols\Letter.cs" />
