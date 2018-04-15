@@ -2,6 +2,7 @@
 
 namespace Eburnification.Test
 {
+    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Parsing;
     using Symbols;
@@ -17,6 +18,8 @@ namespace Eburnification.Test
             var tokenizer = new Tokenizer();
             var token = tokenizer.Parse(parser, TerminalString.Instance);
             Assert.IsNotNull(token);
+            Assert.IsTrue(token.Symbol is TerminalString);
+            Assert.AreEqual(s, token.Value);
         }
 
         [TestMethod]
@@ -37,6 +40,8 @@ namespace Eburnification.Test
             var tokenizer = new Tokenizer();
             var token = tokenizer.Parse(parser, TerminalString.Instance);
             Assert.IsNotNull(token);
+            Assert.IsTrue(token.Symbol is TerminalString);
+            Assert.AreEqual(s, token.Value);
         }
 
         [TestMethod]
@@ -57,6 +62,8 @@ namespace Eburnification.Test
             var tokenizer = new Tokenizer();
             var token = tokenizer.Parse(parser, Integer.Instance);
             Assert.IsNotNull(token);
+            Assert.IsTrue(token.Symbol is Integer);
+            Assert.AreEqual(s, token.Value);
         }
 
         [TestMethod]
@@ -67,6 +74,8 @@ namespace Eburnification.Test
             var tokenizer = new Tokenizer();
             var token = tokenizer.Parse(parser, Integer.Instance);
             Assert.IsNotNull(token);
+            Assert.IsTrue(token.Symbol is Integer);
+            Assert.AreEqual("5678", token.Value);
         }
 
         [TestMethod]
@@ -87,6 +96,8 @@ namespace Eburnification.Test
             var tokenizer = new Tokenizer();
             var token = tokenizer.Parse(parser, MetaIdentifier.Instance);
             Assert.IsNotNull(token);
+            Assert.IsTrue(token.Symbol is MetaIdentifier);
+            Assert.AreEqual(s, token.Value);
         }
     }
 }

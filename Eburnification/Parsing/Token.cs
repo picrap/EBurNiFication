@@ -43,5 +43,15 @@ namespace Eburnification.Parsing
             Value = value;
             Children = children.ToArray();
         }
+
+        /// <summary>
+        /// Gets the self and descendants.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Token> GetSelfAndDescendants()
+        {
+            // you too, have fun with lambdas and enumerables
+            return new[] { this }.Concat(Children.SelectMany(c => c.GetSelfAndDescendants()));
+        }
     }
 }
