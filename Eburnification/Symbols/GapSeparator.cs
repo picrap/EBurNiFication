@@ -17,7 +17,7 @@ namespace Eburnification.Symbols
             {
             }
 
-            return ToTokens(false);
+            return false;
         }
     }
 }

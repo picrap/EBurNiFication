@@ -62,6 +62,15 @@ namespace Eburnification.Parsing
         public static implicit operator AnyToken(Token[] tokens) => new AnyToken(tokens);
 
         /// <summary>
+        /// Performs an implicit conversion from <see cref="System.Boolean"/> to <see cref="AnyToken"/>.
+        /// </summary>
+        /// <param name="result">if set to <c>true</c> [result].</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        public static implicit operator AnyToken(bool result) => result ? Empty : None;
+
+        /// <summary>
         /// Implements the operator ^.
         /// This is a lazy or.
         /// If the <see cref="a"/> token is not valid, then the <see cref="b"/> method is run

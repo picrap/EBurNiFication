@@ -20,16 +20,6 @@ namespace Eburnification.Symbols
         /// <param name="parser">The tokenizer.</param>
         /// <returns></returns>
         public abstract AnyToken TryParse(Tokenizer tokenizer, Parser parser);
-
-        protected static AnyToken ToTokens(Token token)
-        {
-            return token;
-        }
-
-        protected static AnyToken ToTokens(bool singleResult)
-        {
-            return singleResult ? AnyToken.Empty : AnyToken.None;
-        }
     }
 
     /// <summary>

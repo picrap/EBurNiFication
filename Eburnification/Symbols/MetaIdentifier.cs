@@ -7,14 +7,12 @@ namespace Eburnification.Symbols
 
     public class MetaIdentifier : Symbol<MetaIdentifier>
     {
-        private readonly MetaIdentifierCharacter _metaIdentifierCharacter = new MetaIdentifierCharacter();
-
         public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
             if (!parser.TryRead(char.IsLetter))
                 return AnyToken.None;
             // which is actually always true, since we ask for as many as we wantd
-            return tokenizer.ParseSequence(parser, _metaIdentifierCharacter, int.MaxValue);
+            return tokenizer.ParseSequence(parser, MetaIdentifierCharacter.Instance, int.MaxValue);
         }
     }
 }

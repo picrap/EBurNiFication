@@ -9,7 +9,7 @@ namespace Eburnification.Symbols
     {
         public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return ToTokens(parser.TryRead(char.IsDigit));
+            return parser.TryRead(char.IsDigit);
         }
     }
 }
