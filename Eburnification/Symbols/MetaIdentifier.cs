@@ -7,10 +7,10 @@ namespace Eburnification.Symbols
 
     public class MetaIdentifier : Symbol<MetaIdentifier>
     {
-        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
+        public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             if (!parser.TryRead(char.IsLetter))
-                return AnyToken.None;
+                return ParsingResult.None;
             // which is actually always true, since we ask for as many as we wantd
             return tokenizer.ParseSequence(parser, MetaIdentifierCharacter.Instance, int.MaxValue);
         }

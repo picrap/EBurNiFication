@@ -9,28 +9,28 @@ namespace Eburnification.Symbols
     /// </summary>
     public class GapFreeSymbol : Symbol<GapFreeSymbol>
     {
-        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
+        public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return TryParseTerminalNoQuote(tokenizer, parser)
                    ^ (() => tokenizer.Parse(parser, TerminalString.Instance));
         }
 
-        private static AnyToken TryParseTerminalNoQuote(Tokenizer tokenizer, Parser parser)
+        private static ParsingResult TryParseTerminalNoQuote(Tokenizer tokenizer, Parser parser)
         {
             var state = parser.State;
 
-            var anyToken = tokenizer.Parse(parser, TerminalCharacter.Instance);
-            if (anyToken.IsNone)
-                return AnyToken.None;
+            var parsingResult = tokenizer.Parse(parser, TerminalCharacter.Instance);
+            if (parsingResult.IsNone)
+                return ParsingResult.None;
 
             var textParser = parser.CreateSubParser(state);
             if (!tokenizer.ParseAny(textParser, FirstQuoteSymbol.Instance, SecondQuoteSymbol.Instance).IsNone && textParser.Peek() == null)
             {
                 parser.State = state;
-                return AnyToken.None;
+                return ParsingResult.None;
             }
 
-            return anyToken;
+            return parsingResult;
         }
     }
 }

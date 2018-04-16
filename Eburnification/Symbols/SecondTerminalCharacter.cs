@@ -7,7 +7,7 @@ namespace Eburnification.Symbols
 
     public class SecondTerminalCharacter : Symbol<SecondTerminalCharacter>
     {
-        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
+        public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return parser.TryRead(c => c != '\"');
         }

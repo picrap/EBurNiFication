@@ -10,7 +10,7 @@ namespace Eburnification.Symbols
     /// </summary>
     public class CommentlessSymbol : Symbol<CommentlessSymbol>
     {
-        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
+        public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseAny(parser,
                 TerminalCharacter.Instance,

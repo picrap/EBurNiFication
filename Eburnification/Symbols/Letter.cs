@@ -7,7 +7,7 @@ namespace Eburnification.Symbols
 
     public class Letter : Symbol<Letter>
     {
-        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
+        public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return parser.TryRead(char.IsLetter);
         }

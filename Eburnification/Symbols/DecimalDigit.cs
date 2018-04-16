@@ -7,7 +7,7 @@ namespace Eburnification.Symbols
 
     public class DecimalDigit : Symbol<DecimalDigit>
     {
-        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
+        public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return parser.TryRead(char.IsDigit);
         }

@@ -19,7 +19,7 @@ namespace Eburnification.Symbols
         /// <param name="tokenizer"></param>
         /// <param name="parser">The tokenizer.</param>
         /// <returns></returns>
-        public abstract AnyToken TryParse(Tokenizer tokenizer, Parser parser);
+        public abstract ParsingResult TryParse(Tokenizer tokenizer, Parser parser);
     }
 
     /// <summary>

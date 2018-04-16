@@ -10,7 +10,7 @@ namespace Eburnification.Symbols
     {
         protected abstract char Character { get; }
 
-        public override AnyToken TryParse(Tokenizer tokenizer, Parser parser)
+        public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return parser.TryRead(Character);
         }

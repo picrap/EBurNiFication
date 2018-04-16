@@ -8,43 +8,43 @@ namespace Eburnification.Parsing
 
     public class Tokenizer
     {
-        public AnyToken Parse(Parser parser, Symbol symbol)
+        public ParsingResult Parse(Parser parser, Symbol symbol)
         {
             var state = parser.State;
 
-            var anyToken = symbol.TryParse(this, parser);
-            if (anyToken.IsNone)
-                return anyToken;
+            var parsingResult = symbol.TryParse(this, parser);
+            if (parsingResult.IsNone)
+                return parsingResult;
 
             var capture = parser.GetCapture(state);
 
-            return new Token(symbol, capture, anyToken.Tokens);
+            return new Token(symbol, capture, parsingResult.Tokens);
         }
 
-        public AnyToken ParseAll(Parser parser, IEnumerable<AnyToken> anyTokens)
+        public ParsingResult ParseAll(Parser parser, IEnumerable<ParsingResult> anyTokens)
         {
             var state = parser.State;
 
             var tokens = new List<Token>();
-            foreach (var anyToken in anyTokens)
+            foreach (var parsingResult in anyTokens)
             {
-                if (anyToken.IsNone)
+                if (parsingResult.IsNone)
                 {
                     parser.State = state;
-                    return AnyToken.None;
+                    return ParsingResult.None;
                 }
-                tokens.AddRange(anyToken.Tokens);
+                tokens.AddRange(parsingResult.Tokens);
             }
 
             return tokens.ToArray();
         }
 
-        public AnyToken ParseAll(Parser parser, params Symbol[] symbols)
+        public ParsingResult ParseAll(Parser parser, params Symbol[] symbols)
         {
             return ParseAll(parser, symbols.Select(s => Parse(parser, s)));
         }
 
-        public AnyToken ParseAny(Parser parser, params Symbol[] symbols)
+        public ParsingResult ParseAny(Parser parser, params Symbol[] symbols)
         {
             foreach (var symbol in symbols)
             {
@@ -53,10 +53,10 @@ namespace Eburnification.Parsing
                     return token;
             }
 
-            return AnyToken.None;
+            return ParsingResult.None;
         }
 
-        public AnyToken ParseSequence(Parser parser, Symbol symbol, int max, bool strict = true)
+        public ParsingResult ParseSequence(Parser parser, Symbol symbol, int max, bool strict = true)
         {
             var state = parser.State;
 
@@ -78,33 +78,33 @@ namespace Eburnification.Parsing
                 if (!Parse(parser, symbol).IsNone)
                 {
                     parser.State = state;
-                    return AnyToken.None;
+                    return ParsingResult.None;
                 }
             }
 
             return tokens.ToArray();
         }
 
-        public AnyToken ParseSequence(Parser parser, Symbol symbol, int min, int max, bool strict = true)
+        public ParsingResult ParseSequence(Parser parser, Symbol symbol, int min, int max, bool strict = true)
         {
             var state = parser.State;
 
-            var anyToken = ParseSequence(parser, symbol, max, strict);
-            if (anyToken.Tokens.Count >= min)
-                return anyToken;
+            var parsingResult = ParseSequence(parser, symbol, max, strict);
+            if (parsingResult.Tokens.Count >= min)
+                return parsingResult;
 
             parser.State = state;
-            return AnyToken.None;
+            return ParsingResult.None;
         }
 
-        private IEnumerable<AnyToken> GetQuoteSequenceTokens(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
+        private IEnumerable<ParsingResult> GetQuoteSequenceTokens(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
         {
             yield return Parse(parser, startSymbol);
             yield return ParseSequence(parser, terminalCharacter, int.MaxValue);
             yield return Parse(parser, endSymbol);
         }
 
-        public AnyToken ParseQuoteSequence(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
+        public ParsingResult ParseQuoteSequence(Parser parser, Symbol startSymbol, Symbol terminalCharacter, Symbol endSymbol)
         {
             return ParseAll(parser, GetQuoteSequenceTokens(parser, startSymbol, terminalCharacter, endSymbol));
         }
@@ -116,20 +116,20 @@ namespace Eburnification.Parsing
         /// <param name="includeSymbol">The include symbol.</param>
         /// <param name="exceptSymbol">The except symbol.</param>
         /// <returns></returns>
-        public AnyToken ParseException(Parser parser, Symbol includeSymbol, Symbol exceptSymbol)
+        public ParsingResult ParseException(Parser parser, Symbol includeSymbol, Symbol exceptSymbol)
         {
             var state = parser.State;
 
             var includedToken = Parse(parser, includeSymbol);
             if (includedToken.IsNone)
-                return AnyToken.None;
+                return ParsingResult.None;
 
             var innerParser = parser.CreateSubParser(state);
             var excludedToken = Parse(innerParser, exceptSymbol);
             if (!excludedToken.IsNone && innerParser.IsEnd)
             {
                 parser.State = state;
-                return AnyToken.None;
+                return ParsingResult.None;
             }
 
             return includedToken;
