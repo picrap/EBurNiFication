@@ -55,6 +55,15 @@ namespace Eburnification.Parsing
         public static implicit operator ParsingResult(Token[] tokens) => new ParsingResult(tokens);
 
         /// <summary>
+        /// Performs an implicit conversion from <see cref="List{Token}"/> to <see cref="ParsingResult"/>.
+        /// </summary>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        public static implicit operator ParsingResult(List<Token> tokens) => new ParsingResult(tokens.ToArray());
+
+        /// <summary>
         /// Performs an implicit conversion from <see cref="System.Boolean"/> to <see cref="ParsingResult"/>.
         /// </summary>
         /// <param name="result">if set to <c>true</c> [result].</param>

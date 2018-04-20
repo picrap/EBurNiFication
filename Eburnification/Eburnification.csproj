@@ -51,6 +51,8 @@
     <Compile Include="Symbols\DecimalDigit.cs" />
     <Compile Include="Symbols\DefinitionSeparatorSymbol.cs" />
     <Compile Include="Symbols\DefiningSymbol.cs" />
+    <Compile Include="Symbols\DefinitionsList.cs" />
+    <Compile Include="Symbols\EmptySequence.cs" />
     <Compile Include="Symbols\EndCommentSymbol.cs" />
     <Compile Include="Symbols\EndGroupSymbol.cs" />
     <Compile Include="Symbols\EndOptionSymbol.cs" />
@@ -60,14 +62,18 @@
     <Compile Include="Symbols\FirstTerminalCharacter.cs" />
     <Compile Include="Symbols\GapFreeSymbol.cs" />
     <Compile Include="Symbols\GapSeparator.cs" />
+    <Compile Include="Symbols\GroupedSequence.cs" />
     <Compile Include="Symbols\Integer.cs" />
     <Compile Include="Symbols\Letter.cs" />
     <Compile Include="Symbols\MetaIdentifier.cs" />
     <Compile Include="Symbols\MetaIdentifierCharacter.cs" />
+    <Compile Include="Symbols\OptionalSequence.cs" />
     <Compile Include="Symbols\OtherCharacter.cs" />
+    <Compile Include="Symbols\RepeatedSequence.cs" />
     <Compile Include="Symbols\RepetitionSymbol.cs" />
     <Compile Include="Symbols\SecondQuoteSymbol.cs" />
     <Compile Include="Symbols\SecondTerminalCharacter.cs" />
+    <Compile Include="Symbols\Sequence.cs" />
     <Compile Include="Symbols\SpecialSequence.cs" />
     <Compile Include="Symbols\SpecialSequenceSymbol.cs" />
     <Compile Include="Symbols\StartCommentSymbol.cs" />
@@ -77,6 +83,7 @@
     <Compile Include="Symbols\StringCharacterSymbol.cs" />
     <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Symbols\SyntacticException.cs" />
+    <Compile Include="Symbols\SyntacticPrimary.cs" />
     <Compile Include="Symbols\TerminalCharacter.cs" />
     <Compile Include="Symbols\TerminalString.cs" />
     <Compile Include="Symbols\TerminatorSymbol.cs" />

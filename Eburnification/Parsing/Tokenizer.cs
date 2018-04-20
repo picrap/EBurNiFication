@@ -134,5 +134,40 @@ namespace Eburnification.Parsing
 
             return includedToken;
         }
+
+        public ParsingResult ParseSeparated(Parser parser, Symbol symbol, Symbol separator, int min = 1)
+        {
+            var state = parser.State;
+
+            var results = new List<Token>();
+            for (var count = 0; ; count++)
+            {
+                // on next loop, expect separator,
+                // otherwise this means end
+                if (count > 0)
+                {
+                    if (separator.TryParse(this, parser).IsNone)
+                    {
+                        if (count < min)
+                        {
+                            parser.State = state;
+                            return ParsingResult.None;
+                        }
+                        break;
+                    }
+                }
+
+                var parsingResult = symbol.TryParse(this, parser);
+                if (parsingResult.IsNone)
+                {
+                    parser.State = state;
+                    return ParsingResult.None;
+                }
+
+                results.AddRange(parsingResult.Tokens);
+            }
+
+            return results;
+        }
     }
 }
