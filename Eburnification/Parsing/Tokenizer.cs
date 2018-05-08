@@ -10,6 +10,24 @@ namespace Eburnification.Parsing
     {
         public ParsingResult Parse(Parser parser, Symbol symbol)
         {
+            if (symbol.IsGapFreeSymbol)
+                return ParseGapFree(parser, symbol);
+            return ParseNonGapFree(parser, symbol);
+        }
+
+        private ParsingResult ParseGapFree(Parser parser, Symbol symbol)
+        {
+            var state = parser.State;
+            GapSeparator.Instance.TryParse(this, parser);
+            var parsingResult = ParseNonGapFree(parser, symbol);
+            GapSeparator.Instance.TryParse(this, parser);
+            if (parsingResult.IsNone)
+                parser.State = state;
+            return parsingResult;
+        }
+
+        private ParsingResult ParseNonGapFree(Parser parser, Symbol symbol)
+        {
             var state = parser.State;
 
             var parsingResult = symbol.TryParse(this, parser);
@@ -156,7 +174,7 @@ namespace Eburnification.Parsing
             var state = parser.State;
 
             var results = new List<Token>();
-            for (var count = 0;; count++)
+            for (var count = 0; ; count++)
             {
                 // on next loop, expect separator,
                 // otherwise this means end

@@ -16,7 +16,7 @@ namespace Eburnification.Symbols
             {
             }
 
-            return false;
+            return true;
         }
     }
 }

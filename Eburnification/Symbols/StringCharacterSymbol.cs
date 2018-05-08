@@ -9,8 +9,12 @@ namespace Eburnification.Symbols
     {
         protected abstract string Character { get; }
 
+        protected virtual bool IsGapFreeSymbol { get; } = true;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
+            if (IsGapFreeSymbol)
+                tokenizer.Parse(parser, GapSeparator.Instance);
             return parser.TryRead(Character);
         }
     }

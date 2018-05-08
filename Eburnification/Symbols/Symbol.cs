@@ -12,6 +12,8 @@ namespace Eburnification.Symbols
     {
         private static readonly Token[] NoToken = new Token[0];
 
+        public virtual bool IsGapFreeSymbol => false;
+
         /// <summary>
         ///     Tries to parse symbol from current tokenizer.
         /// </summary>

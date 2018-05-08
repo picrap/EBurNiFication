@@ -4,6 +4,8 @@ namespace Eburnification.Symbols
 {
     public class SecondQuoteSymbol : CharCharacterSymbol<SecondQuoteSymbol>
     {
+        public override bool IsGapFreeSymbol => false;
+
         protected override char Character => '"';
     }
 }
