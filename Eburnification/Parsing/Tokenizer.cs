@@ -8,6 +8,15 @@ namespace Eburnification.Parsing
 
     public class Tokenizer
     {
+        public Token ParseEbnf(string s)
+        {
+            var parser = new TextParser(s);
+            var result = Parse(parser, Syntax.Instance);
+            if (parser.IsEnd)
+                return result.Token;
+            return null;
+        }
+
         public ParsingResult Parse(Parser parser, Symbol symbol)
         {
             if (symbol.IsGapFreeSymbol)
