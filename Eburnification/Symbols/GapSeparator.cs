@@ -9,6 +9,8 @@ namespace Eburnification.Symbols
     /// </summary>
     public class GapSeparator : Symbol<GapSeparator>
     {
+        public override bool IsSignificant => false;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             while (parser.TryRead(" ") || parser.TryRead("\t") || parser.TryRead("\n")

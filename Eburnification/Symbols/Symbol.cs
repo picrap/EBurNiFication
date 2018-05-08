@@ -14,6 +14,8 @@ namespace Eburnification.Symbols
 
         public virtual bool IsGapFreeSymbol => false;
 
+        public virtual bool IsSignificant => true;
+
         /// <summary>
         ///     Tries to parse symbol from current tokenizer.
         /// </summary>

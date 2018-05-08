@@ -40,7 +40,7 @@ namespace Eburnification.Parsing
         /// <returns>
         ///     The result of the conversion.
         /// </returns>
-        public static implicit operator ParsingResult(Token token) => new ParsingResult(new[] {token});
+        public static implicit operator ParsingResult(Token token) => new ParsingResult(new[] { token });
 
         /// <summary>
         ///     Performs an implicit conversion from <see cref="Token[]" /> to <see cref="ParsingResult" />.
@@ -83,6 +83,17 @@ namespace Eburnification.Parsing
         public static ParsingResult operator ^(ParsingResult a, Func<ParsingResult> b)
         {
             return a.IsNone ? b() : a;
+        }
+
+        /// <summary>
+        /// Removes the children.
+        /// </summary>
+        /// <returns></returns>
+        public ParsingResult AsTerminal()
+        {
+            if (IsNone)
+                return this;
+            return Empty;
         }
     }
 }

@@ -47,7 +47,17 @@ namespace Eburnification.Parsing
 
             var capture = parser.GetCapture(state);
 
-            return new Token(symbol, capture, parsingResult.Tokens);
+            // optimization
+            var significantTokens = parsingResult.Tokens.Where(t => t.Symbol.IsSignificant).ToArray();
+            if (significantTokens.Length == 1)
+            {
+                var singleToken = significantTokens[0];
+                if (capture == singleToken.Value)
+                    return singleToken;
+            }
+
+            // otherwise, keep it as it was
+            return new Token(symbol, capture, significantTokens);
         }
 
         public ParsingResult ParseAll(Parser parser, IEnumerable<ParsingResult> allResults)
