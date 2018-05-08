@@ -20,9 +20,6 @@ namespace Eburnification.Parsing
         /// </value>
         public IList<Token> Tokens { get; }
 
-        // TODO: remove
-        public Token Token => Tokens?.Single();
-
         /// <summary>
         ///     Indicates whether there is a valid result.
         /// </summary>

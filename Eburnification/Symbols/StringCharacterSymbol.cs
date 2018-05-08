@@ -9,7 +9,7 @@ namespace Eburnification.Symbols
     {
         protected abstract string Character { get; }
 
-        protected virtual bool IsGapFreeSymbol { get; } = true;
+        public override bool IsGapFreeSymbol => true;
 
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {

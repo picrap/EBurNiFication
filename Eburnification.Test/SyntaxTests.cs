@@ -5,6 +5,7 @@ namespace Eburnification.Test
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Parsing;
     using Symbols;
+    using Syntax;
 
     [TestClass]
     public class SyntaxTests
@@ -13,18 +14,18 @@ namespace Eburnification.Test
         public void SimpleDefinition()
         {
             const string s = "a='ah';";
-            var parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, Syntax.Instance).Token;
+            var token = tokenizer.Parse(s);
+            Assert.IsNotNull(token);
         }
 
         [TestMethod]
         public void SimpleDefinitionWithGaps()
         {
             const string s = "a = 'ah' ;";
-            var parser = new TextParser(s);
             var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(parser, Syntax.Instance).Token;
+            var token = tokenizer.Parse(s);
+            Assert.IsNotNull(token);
         }
 
         [TestMethod]
@@ -37,7 +38,11 @@ false = 'false'|'no'|'off'|'0';
 boolean = true|false;
 ";
             var tokenizer = new Tokenizer();
-            var token = tokenizer.ParseEbnf(s);
+            var token = tokenizer.Parse(s);
+            Assert.IsNotNull(token);
+
+            //var sb = new SyntaxBuilder();
+            //var newSyntax = sb.Build(token);
         }
     }
 }

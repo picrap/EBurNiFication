@@ -92,6 +92,7 @@
     <Compile Include="Symbols\TerminalCharacter.cs" />
     <Compile Include="Symbols\TerminalString.cs" />
     <Compile Include="Symbols\TerminatorSymbol.cs" />
+    <Compile Include="Syntax\SyntaxBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
