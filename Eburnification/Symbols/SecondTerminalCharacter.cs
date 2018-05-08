@@ -2,7 +2,6 @@
 
 namespace Eburnification.Symbols
 {
-    using System.Collections.Generic;
     using Parsing;
 
     public class SecondTerminalCharacter : Symbol<SecondTerminalCharacter>

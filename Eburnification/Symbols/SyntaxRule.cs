@@ -4,11 +4,11 @@ namespace Eburnification.Symbols
 {
     using Parsing;
 
-    public class BracketedTextualComment : Symbol<BracketedTextualComment>
+    public class SyntaxRule : Symbol<SyntaxRule>
     {
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
-            return tokenizer.ParseQuoteSequence(parser, StartCommentSymbol.Instance, CommentSymbol.Instance, EndCommentSymbol.Instance);
+            return tokenizer.ParseAll(parser, MetaIdentifier.Instance, DefiningSymbol.Instance, DefinitionsList.Instance, TerminatorSymbol.Instance);
         }
     }
 }

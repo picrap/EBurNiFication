@@ -21,22 +21,38 @@ namespace Eburnification.Parsing
             return new Token(symbol, capture, parsingResult.Tokens);
         }
 
-        public ParsingResult ParseAll(Parser parser, IEnumerable<ParsingResult> anyTokens)
+        public ParsingResult ParseAll(Parser parser, IEnumerable<ParsingResult> allResults)
         {
             var state = parser.State;
 
             var tokens = new List<Token>();
-            foreach (var parsingResult in anyTokens)
+            foreach (var parsingResult in allResults)
             {
                 if (parsingResult.IsNone)
                 {
                     parser.State = state;
                     return ParsingResult.None;
                 }
+
                 tokens.AddRange(parsingResult.Tokens);
             }
 
             return tokens.ToArray();
+        }
+
+        public ParsingResult ParseAny(Parser parser, IEnumerable<ParsingResult> anyResults)
+        {
+            var state = parser.State;
+
+            foreach (var parsingResult in anyResults)
+            {
+                if (!parsingResult.IsNone)
+                    return parsingResult;
+
+                parser.State = state;
+            }
+
+            return ParsingResult.None;
         }
 
         public ParsingResult ParseAll(Parser parser, params Symbol[] symbols)
@@ -110,7 +126,7 @@ namespace Eburnification.Parsing
         }
 
         /// <summary>
-        /// Parses a symbol, only if it excludes another symbol.
+        ///     Parses a symbol, only if it excludes another symbol.
         /// </summary>
         /// <param name="parser">The parser.</param>
         /// <param name="includeSymbol">The include symbol.</param>
@@ -140,7 +156,7 @@ namespace Eburnification.Parsing
             var state = parser.State;
 
             var results = new List<Token>();
-            for (var count = 0; ; count++)
+            for (var count = 0;; count++)
             {
                 // on next loop, expect separator,
                 // otherwise this means end
@@ -153,6 +169,7 @@ namespace Eburnification.Parsing
                             parser.State = state;
                             return ParsingResult.None;
                         }
+
                         break;
                     }
                 }

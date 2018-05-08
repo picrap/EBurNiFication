@@ -2,12 +2,11 @@
 
 namespace Eburnification.Symbols
 {
-    using System.Collections.Generic;
     using Parsing;
 
     /// <summary>
-    /// Base class for all symbols.
-    /// Provides wrappers to convert results to Tokens list
+    ///     Base class for all symbols.
+    ///     Provides wrappers to convert results to Tokens list
     /// </summary>
     public abstract class Symbol
     {
@@ -23,8 +22,8 @@ namespace Eburnification.Symbols
     }
 
     /// <summary>
-    /// Each <see cref="Symbol{TSymbol}"/> has a default instance, that we create here.
-    /// This is a pure expression of laziness
+    ///     Each <see cref="Symbol{TSymbol}" /> has a default instance, that we create here.
+    ///     This is a pure expression of laziness
     /// </summary>
     /// <typeparam name="TSymbol">The type of the symbol.</typeparam>
     public abstract class Symbol<TSymbol> : Symbol

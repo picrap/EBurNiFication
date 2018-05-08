@@ -13,10 +13,10 @@ namespace Eburnification.Parsing
         public static ParsingResult Empty = new ParsingResult(new Token[0]);
 
         /// <summary>
-        /// Gets the tokens as an array. This is never null
+        ///     Gets the tokens as an array. This is never null
         /// </summary>
         /// <value>
-        /// An array of <see cref="Token"/>.
+        ///     An array of <see cref="Token" />.
         /// </value>
         public IList<Token> Tokens { get; }
 
@@ -24,10 +24,10 @@ namespace Eburnification.Parsing
         public Token Token => Tokens?.Single();
 
         /// <summary>
-        /// Indicates whether there is a valid result.
+        ///     Indicates whether there is a valid result.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if no result; otherwise, if result, <c>false</c>.
+        ///     <c>true</c> if no result; otherwise, if result, <c>false</c>.
         /// </value>
         public bool IsNone => Tokens == null;
 
@@ -37,51 +37,51 @@ namespace Eburnification.Parsing
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Token"/> to <see cref="ParsingResult"/>.
+        ///     Performs an implicit conversion from <see cref="Token" /> to <see cref="ParsingResult" />.
         /// </summary>
         /// <param name="token">The token.</param>
         /// <returns>
-        /// The result of the conversion.
+        ///     The result of the conversion.
         /// </returns>
-        public static implicit operator ParsingResult(Token token) => new ParsingResult(new[] { token });
+        public static implicit operator ParsingResult(Token token) => new ParsingResult(new[] {token});
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Token[]"/> to <see cref="ParsingResult"/>.
+        ///     Performs an implicit conversion from <see cref="Token[]" /> to <see cref="ParsingResult" />.
         /// </summary>
         /// <param name="tokens">The tokens.</param>
         /// <returns>
-        /// The result of the conversion.
+        ///     The result of the conversion.
         /// </returns>
         public static implicit operator ParsingResult(Token[] tokens) => new ParsingResult(tokens);
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="List{Token}"/> to <see cref="ParsingResult"/>.
+        ///     Performs an implicit conversion from <see cref="List{Token}" /> to <see cref="ParsingResult" />.
         /// </summary>
         /// <param name="tokens">The tokens.</param>
         /// <returns>
-        /// The result of the conversion.
+        ///     The result of the conversion.
         /// </returns>
         public static implicit operator ParsingResult(List<Token> tokens) => new ParsingResult(tokens.ToArray());
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.Boolean"/> to <see cref="ParsingResult"/>.
+        ///     Performs an implicit conversion from <see cref="System.Boolean" /> to <see cref="ParsingResult" />.
         /// </summary>
         /// <param name="result">if set to <c>true</c> [result].</param>
         /// <returns>
-        /// The result of the conversion.
+        ///     The result of the conversion.
         /// </returns>
         public static implicit operator ParsingResult(bool result) => result ? Empty : None;
 
         /// <summary>
-        /// Implements the operator ^.
-        /// This is a lazy or.
-        /// If the <see cref="a"/> token is not valid, then the <see cref="b"/> method is run
-        /// and its result returned
+        ///     Implements the operator ^.
+        ///     This is a lazy or.
+        ///     If the <see cref="a" /> token is not valid, then the <see cref="b" /> method is run
+        ///     and its result returned
         /// </summary>
         /// <param name="a">a.</param>
         /// <param name="b">The b.</param>
         /// <returns>
-        /// The result of the operator.
+        ///     The result of the operator.
         /// </returns>
         public static ParsingResult operator ^(ParsingResult a, Func<ParsingResult> b)
         {

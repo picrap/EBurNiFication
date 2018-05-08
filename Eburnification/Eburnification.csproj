@@ -74,6 +74,7 @@
     <Compile Include="Symbols\SecondQuoteSymbol.cs" />
     <Compile Include="Symbols\SecondTerminalCharacter.cs" />
     <Compile Include="Symbols\Sequence.cs" />
+    <Compile Include="Symbols\SingleDefinition.cs" />
     <Compile Include="Symbols\SpecialSequence.cs" />
     <Compile Include="Symbols\SpecialSequenceSymbol.cs" />
     <Compile Include="Symbols\StartCommentSymbol.cs" />
@@ -83,7 +84,11 @@
     <Compile Include="Symbols\StringCharacterSymbol.cs" />
     <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Symbols\SyntacticException.cs" />
+    <Compile Include="Symbols\SyntacticFactor.cs" />
     <Compile Include="Symbols\SyntacticPrimary.cs" />
+    <Compile Include="Symbols\SyntacticTerm.cs" />
+    <Compile Include="Symbols\Syntax.cs" />
+    <Compile Include="Symbols\SyntaxRule.cs" />
     <Compile Include="Symbols\TerminalCharacter.cs" />
     <Compile Include="Symbols\TerminalString.cs" />
     <Compile Include="Symbols\TerminatorSymbol.cs" />

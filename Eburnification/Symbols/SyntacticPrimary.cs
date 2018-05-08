@@ -1,9 +1,10 @@
-﻿namespace Eburnification.Symbols
+﻿// This is EBurNiFication - https://github.com/picrap/EBurNiFication - MIT License
+
+namespace Eburnification.Symbols
 {
-    using System;
     using Parsing;
 
-    public class SyntacticPrimary: Symbol<SyntacticPrimary>
+    public class SyntacticPrimary : Symbol<SyntacticPrimary>
     {
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {

@@ -2,11 +2,10 @@
 
 namespace Eburnification.Symbols
 {
-    using System.Collections.Generic;
     using Parsing;
 
     /// <summary>
-    /// terminal-character (§6.2)
+    ///     terminal-character (§6.2)
     /// </summary>
     public class TerminalCharacter : Symbol<TerminalCharacter>
     {

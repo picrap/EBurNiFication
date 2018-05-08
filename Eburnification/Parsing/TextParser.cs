@@ -5,7 +5,7 @@ namespace Eburnification.Parsing
     using System.Diagnostics;
 
     /// <summary>
-    /// Implementation of <see cref="Parser"/> for text
+    ///     Implementation of <see cref="Parser" /> for text
     /// </summary>
     /// <seealso cref="Eburnification.Parsing.Parser" />
     [DebuggerDisplay("{" + nameof(Debug) + "}")]
@@ -41,13 +41,13 @@ namespace Eburnification.Parsing
 
         private static TextParserState GetTextParserState(ParserState value)
         {
-            return (TextParserState)value;
+            return (TextParserState) value;
         }
 
         public override char? Peek(int offset)
         {
             var cursor = _cursor + offset;
-            return cursor < _text.Length ? _text[cursor] : (char?)null;
+            return cursor < _text.Length ? _text[cursor] : (char?) null;
         }
 
         public override void Next(int step)
@@ -66,7 +66,7 @@ namespace Eburnification.Parsing
 
         public override Parser CreateSubParser(ParserState from)
         {
-            return new TextParser(_text,GetTextParserState(from).Cursor);
+            return new TextParser(_text, GetTextParserState(from).Cursor);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Eburnification.Symbols
     using Parsing;
 
     /// <summary>
-    /// special-sequence (§5.11)
+    ///     special-sequence (§5.11)
     /// </summary>
     public class SpecialSequence : Symbol<SpecialSequence>
     {

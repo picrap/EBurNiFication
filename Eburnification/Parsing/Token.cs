@@ -8,32 +8,32 @@ namespace Eburnification.Parsing
     using Symbols;
 
     /// <summary>
-    /// Represents a captured text
+    ///     Represents a captured text
     /// </summary>
     [DebuggerDisplay("{" + nameof(Value) + "}")]
     public class Token
     {
         /// <summary>
-        /// Gets the symbol that captured the value.
+        ///     Gets the symbol that captured the value.
         /// </summary>
         /// <value>
-        /// The symbol.
+        ///     The symbol.
         /// </value>
         public Symbol Symbol { get; }
 
         /// <summary>
-        /// Gets the captured value.
+        ///     Gets the captured value.
         /// </summary>
         /// <value>
-        /// The value.
+        ///     The value.
         /// </value>
         public string Value { get; }
 
         /// <summary>
-        /// Gets the children.
+        ///     Gets the children.
         /// </summary>
         /// <value>
-        /// The children.
+        ///     The children.
         /// </value>
         public Token[] Children { get; }
 
@@ -45,13 +45,13 @@ namespace Eburnification.Parsing
         }
 
         /// <summary>
-        /// Gets the self and descendants.
+        ///     Gets the self and descendants.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Token> GetSelfAndDescendants()
         {
             // you too, have fun with lambdas and enumerables
-            return new[] { this }.Concat(Children.SelectMany(c => c.GetSelfAndDescendants()));
+            return new[] {this}.Concat(Children.SelectMany(c => c.GetSelfAndDescendants()));
         }
     }
 }
