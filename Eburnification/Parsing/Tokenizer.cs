@@ -5,6 +5,7 @@ namespace Eburnification.Parsing
     using System.Collections.Generic;
     using System.Linq;
     using Symbols;
+    using Symbols.Ebnf;
 
     public class Tokenizer
     {

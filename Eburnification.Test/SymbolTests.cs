@@ -6,6 +6,7 @@ namespace Eburnification.Test
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Parsing;
     using Symbols;
+    using Symbols.Ebnf;
 
     [TestClass]
     public class SymbolTests
