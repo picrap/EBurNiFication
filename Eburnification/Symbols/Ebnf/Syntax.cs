@@ -7,6 +7,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class Syntax : Symbol<Syntax>
     {
+        public override SymbolKind Kind => SymbolKind.OneOf;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseAll(parser, ParseAll(tokenizer, parser));

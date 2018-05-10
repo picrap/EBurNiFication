@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class SyntaxRule : Symbol<SyntaxRule>
     {
+        public override SymbolKind Kind => SymbolKind.Definition;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseAll(parser, MetaIdentifier.Instance, DefiningSymbol.Instance, DefinitionsList.Instance, TerminatorSymbol.Instance);

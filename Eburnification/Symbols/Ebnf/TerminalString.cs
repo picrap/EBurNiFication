@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class TerminalString : Symbol<TerminalString>
     {
+        public override SymbolKind Kind => SymbolKind.Literal;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             var parsingResult = tokenizer.ParseQuoteSequence(parser, FirstQuoteSymbol.Instance, FirstTerminalCharacter.Instance, FirstQuoteSymbol.Instance)

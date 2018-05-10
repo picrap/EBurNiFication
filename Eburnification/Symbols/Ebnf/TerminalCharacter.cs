@@ -9,6 +9,8 @@ namespace Eburnification.Symbols.Ebnf
     /// </summary>
     public class TerminalCharacter : Symbol<TerminalCharacter>
     {
+        public override SymbolKind Kind => SymbolKind.Literal;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseAny(parser,

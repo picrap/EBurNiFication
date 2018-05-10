@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class SecondTerminalCharacter : Symbol<SecondTerminalCharacter>
     {
+        public override SymbolKind Kind => SymbolKind.Literal;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return parser.TryRead(c => c != '\"');

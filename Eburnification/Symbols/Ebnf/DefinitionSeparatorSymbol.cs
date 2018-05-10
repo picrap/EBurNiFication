@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class DefinitionSeparatorSymbol : Symbol<DefinitionSeparatorSymbol>
     {
+        public override bool IsGapFreeSymbol => true;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return parser.TryRead('|') || parser.TryRead('/') || parser.TryRead('!');

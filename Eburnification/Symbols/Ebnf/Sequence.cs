@@ -8,6 +8,8 @@ namespace Eburnification.Symbols.Ebnf
     {
         private readonly Symbol[] _symbols;
 
+        public override SymbolKind Kind => SymbolKind.AllOf;
+
         public Sequence(params Symbol[] symbols)
         {
             _symbols = symbols;

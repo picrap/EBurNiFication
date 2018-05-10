@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class OptionalSequence : Symbol<OptionalSequence>
     {
+        public override SymbolKind Kind => SymbolKind.AllOf;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseAll(parser, StartOptionSymbol.Instance, DefinitionsList.Instance, EndOptionSymbol.Instance);

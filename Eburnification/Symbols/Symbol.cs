@@ -10,11 +10,11 @@ namespace Eburnification.Symbols
     /// </summary>
     public abstract class Symbol
     {
-        private static readonly Token[] NoToken = new Token[0];
-
         public virtual bool IsGapFreeSymbol => false;
 
         public virtual bool IsSignificant => true;
+
+        public virtual SymbolKind Kind => SymbolKind.Neutral;
 
         /// <summary>
         ///     Tries to parse symbol from current tokenizer.

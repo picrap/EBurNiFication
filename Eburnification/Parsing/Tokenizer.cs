@@ -202,7 +202,7 @@ namespace Eburnification.Parsing
                 // otherwise this means end
                 if (count > 0)
                 {
-                    if (separator.TryParse(this, parser).IsNone)
+                    if (Parse(parser, separator).IsNone)
                     {
                         if (count < min)
                         {
@@ -214,7 +214,7 @@ namespace Eburnification.Parsing
                     }
                 }
 
-                var parsingResult = symbol.TryParse(this, parser);
+                var parsingResult = Parse(parser, symbol);
                 if (parsingResult.IsNone)
                 {
                     parser.State = state;
