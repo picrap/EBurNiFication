@@ -8,6 +8,8 @@ namespace Eburnification.Symbols
 
     public class OrSymbol : Symbol
     {
+        public override bool IsGapFreeSymbol => true;
+
         public Symbol[] Symbols { get; }
 
         public override SymbolKind Kind => SymbolKind.OneOf;

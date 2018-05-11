@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class SingleDefinition : Symbol<SingleDefinition>
     {
+        public override SymbolKind Kind => SymbolKind.AllOf;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
             return tokenizer.ParseSeparated(parser, SyntacticTerm.Instance, ConcatenateSymbol.Instance);

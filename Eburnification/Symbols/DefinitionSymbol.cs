@@ -4,14 +4,16 @@ namespace Eburnification.Symbols
 {
     using Parsing;
 
-    public class DefinitionSymbol : Symbol
+    public class DefinitionSymbol : Symbol, IDefinitionSymbol
     {
-        public Symbol Identifier { get; }
-        public Symbol Value { get; }
+        public override bool IsGapFreeSymbol => true;
 
         public override SymbolKind Kind => SymbolKind.Definition;
 
-        public DefinitionSymbol(Symbol identifier, Symbol value)
+        public string Identifier { get; }
+        public Symbol Value { get; }
+
+        public DefinitionSymbol(string identifier, Symbol value)
         {
             Identifier = identifier;
             Value = value;
@@ -19,7 +21,18 @@ namespace Eburnification.Symbols
 
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
-            throw new System.NotImplementedException();
+            // identifier is not used, we only look for the value
+            return tokenizer.Parse(parser, Value);
+        }
+
+        public Token GetIdentifier(Token[] tokens)
+        {
+            return new Token(new LiteralSymbol(Identifier), Identifier, new Token[0]);
+        }
+
+        public Token GetValue(Token[] tokens)
+        {
+            return tokens[0];
         }
     }
 }

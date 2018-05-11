@@ -84,8 +84,12 @@
     <Compile Include="Symbols\Ebnf\StartOptionSymbol.cs" />
     <Compile Include="Symbols\Ebnf\StartRepeatSymbol.cs" />
     <Compile Include="Symbols\Ebnf\StringCharacterSymbol.cs" />
+    <Compile Include="Symbols\IDefinitionSymbol.cs" />
+    <Compile Include="Symbols\IRepeatSymbol.cs" />
     <Compile Include="Symbols\LiteralSymbol.cs" />
+    <Compile Include="Symbols\LookupSymbol.cs" />
     <Compile Include="Symbols\OrSymbol.cs" />
+    <Compile Include="Symbols\RepeatSymbol.cs" />
     <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Symbols\Ebnf\SyntacticException.cs" />
     <Compile Include="Symbols\Ebnf\SyntacticFactor.cs" />

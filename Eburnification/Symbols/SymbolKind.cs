@@ -9,6 +9,7 @@ namespace Eburnification.Symbols
         Identifier,
         OneOf,
         AllOf,
+        Repeat,
         Definition,
     }
 }

@@ -2,18 +2,20 @@
 
 namespace Eburnification.Symbols
 {
+    using System.Collections;
     using Parsing;
 
     public class LiteralSymbol : Symbol
     {
-        public override SymbolKind Kind { get; }
+        public override bool IsGapFreeSymbol => true;
+
+        public override SymbolKind Kind => SymbolKind.Literal;
 
         public string Literal { get; }
 
-        public LiteralSymbol(string literal, SymbolKind symbolKind)
+        public LiteralSymbol(string literal)
         {
             Literal = literal;
-            Kind = symbolKind;
         }
 
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
