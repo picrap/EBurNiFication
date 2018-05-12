@@ -78,6 +78,7 @@
     <Compile Include="Symbols\Ebnf\Sequence.cs" />
     <Compile Include="Symbols\Ebnf\SingleDefinition.cs" />
     <Compile Include="Symbols\Ebnf\SpecialSequence.cs" />
+    <Compile Include="Symbols\Ebnf\SpecialSequenceCharacter.cs" />
     <Compile Include="Symbols\Ebnf\SpecialSequenceSymbol.cs" />
     <Compile Include="Symbols\Ebnf\StartCommentSymbol.cs" />
     <Compile Include="Symbols\Ebnf\StartGroupSymbol.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Symbols\IRepeatSymbol.cs" />
     <Compile Include="Symbols\LiteralSymbol.cs" />
     <Compile Include="Symbols\LookupSymbol.cs" />
+    <Compile Include="Symbols\ExceptSymbol.cs" />
     <Compile Include="Symbols\OrSymbol.cs" />
     <Compile Include="Symbols\RepeatSymbol.cs" />
     <Compile Include="Symbols\Symbol.cs" />

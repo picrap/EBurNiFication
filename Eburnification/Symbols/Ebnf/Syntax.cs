@@ -16,9 +16,13 @@ namespace Eburnification.Symbols.Ebnf
 
         private IEnumerable<ParsingResult> ParseAll(Tokenizer tokenizer, Parser parser)
         {
-            yield return tokenizer.Parse(parser, GapSeparator.Instance);
+            tokenizer.Parse(parser, GapSeparator.Instance);
+            tokenizer.Parse(parser, BracketedTextualComment.Instance);
+            tokenizer.Parse(parser, GapSeparator.Instance);
             yield return tokenizer.ParseSequence(parser, SyntaxRule.Instance, 1, int.MaxValue);
-            yield return tokenizer.Parse(parser, GapSeparator.Instance);
+            tokenizer.Parse(parser, GapSeparator.Instance);
+            tokenizer.Parse(parser, BracketedTextualComment.Instance);
+            tokenizer.Parse(parser, GapSeparator.Instance);
         }
     }
 }

@@ -6,8 +6,6 @@ namespace Eburnification.Symbols
 
     public class DefinitionSymbol : Symbol, IDefinitionSymbol
     {
-        public override bool IsGapFreeSymbol => true;
-
         public override SymbolKind Kind => SymbolKind.Definition;
 
         public string Identifier { get; }

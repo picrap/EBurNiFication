@@ -22,17 +22,31 @@ namespace Eburnification.Parsing
 
         public ParsingResult Parse(Parser parser, Symbol symbol)
         {
-            if (symbol.IsGapFreeSymbol)
-                return ParseGapFree(parser, symbol);
+            if (symbol.IsGapFreeSymbol || symbol.IsCommentlessSymbol)
+                return ParseSpecial(parser, symbol);
             return ParseNonGapFree(parser, symbol);
         }
 
-        private ParsingResult ParseGapFree(Parser parser, Symbol symbol)
+        private ParsingResult ParseSpecial(Parser parser, Symbol symbol)
         {
             var state = parser.State;
-            GapSeparator.Instance.TryParse(this, parser);
+
+            if (symbol.IsGapFreeSymbol)
+                GapSeparator.Instance.TryParse(this, parser);
+            if (symbol.IsCommentlessSymbol)
+                BracketedTextualComment.Instance.TryParse(this, parser);
+            if (symbol.IsGapFreeSymbol)
+                GapSeparator.Instance.TryParse(this, parser);
+
             var parsingResult = ParseNonGapFree(parser, symbol);
-            GapSeparator.Instance.TryParse(this, parser);
+
+            if (symbol.IsGapFreeSymbol)
+                GapSeparator.Instance.TryParse(this, parser);
+            if (symbol.IsCommentlessSymbol)
+                BracketedTextualComment.Instance.TryParse(this, parser);
+            if (symbol.IsGapFreeSymbol)
+                GapSeparator.Instance.TryParse(this, parser);
+
             if (parsingResult.IsNone)
                 parser.State = state;
             return parsingResult;

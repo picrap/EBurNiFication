@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class MetaIdentifier : Symbol<MetaIdentifier>
     {
+        public override bool IsCommentlessSymbol => true;
+
         public override SymbolKind Kind => SymbolKind.Identifier;
 
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)

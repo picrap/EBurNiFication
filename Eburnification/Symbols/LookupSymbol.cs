@@ -7,8 +7,6 @@ namespace Eburnification.Symbols
 
     public class LookupSymbol : Symbol
     {
-        public override bool IsGapFreeSymbol => true;
-
         public override SymbolKind Kind => SymbolKind.Neutral;
 
         private readonly string _identifier;

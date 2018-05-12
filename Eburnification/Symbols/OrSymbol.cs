@@ -8,8 +8,6 @@ namespace Eburnification.Symbols
 
     public class OrSymbol : Symbol
     {
-        public override bool IsGapFreeSymbol => true;
-
         public Symbol[] Symbols { get; }
 
         public override SymbolKind Kind => SymbolKind.OneOf;
@@ -17,6 +15,11 @@ namespace Eburnification.Symbols
         public OrSymbol(IEnumerable<Symbol> symbols)
         {
             Symbols = symbols.ToArray();
+        }
+
+        public OrSymbol(params Symbol[] symbols)
+        {
+            Symbols = symbols;
         }
 
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)

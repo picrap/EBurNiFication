@@ -9,11 +9,11 @@ namespace Eburnification.Symbols.Ebnf
     /// </summary>
     public class SpecialSequence : Symbol<SpecialSequence>
     {
+        public override bool IsCommentlessSymbol => true;
+
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
         {
-            // the ISO defines it for extension, so in this strict use, 
-            // we'll never get a special-sequence
-            return ParsingResult.None;
+            return tokenizer.ParseQuoteSequence(parser, SpecialSequenceSymbol.Instance, SpecialSequenceCharacter.Instance, SpecialSequenceSymbol.Instance);
         }
     }
 }

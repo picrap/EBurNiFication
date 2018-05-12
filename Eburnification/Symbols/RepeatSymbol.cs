@@ -9,8 +9,6 @@ namespace Eburnification.Symbols
     {
         private readonly Symbol _symbol;
 
-        public override bool IsGapFreeSymbol => true;
-
         public override SymbolKind Kind => SymbolKind.Repeat;
 
         public RepeatSymbol(Symbol symbol)

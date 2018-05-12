@@ -11,6 +11,7 @@ namespace Eburnification.Symbols
     public abstract class Symbol
     {
         public virtual bool IsGapFreeSymbol => false;
+        public virtual bool IsCommentlessSymbol => false;
 
         public virtual bool IsSignificant => true;
 

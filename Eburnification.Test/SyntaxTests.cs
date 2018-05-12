@@ -37,12 +37,32 @@ namespace Eburnification.Test
         }
 
         [TestMethod]
+        public void SpecialSequence()
+        {
+            const string s = "a=? dude! ?;";
+            var tokenizer = new Tokenizer();
+            var token = tokenizer.Parse(s);
+            Assert.IsNotNull(token);
+        }
+
+        [TestMethod]
+        public void Comment()
+        {
+            const string s = "(* something here *) one='1';";
+            var tokenizer = new Tokenizer();
+            var token = tokenizer.Parse(s);
+            Assert.IsNotNull(token);
+        }
+
+        [TestMethod]
         public void NewSyntax()
         {
             const string s = @"
 assignment = identifier, assignmentsymbol, anyvalue;
 
-assignmentsymbol = '=' | ':';
+space = ' ';
+assignmentcharacter = '=' | ':';
+assignmentsymbol = {space}, assignmentcharacter, {space};
 
 identifier = {identifierchar};
 identifierchar = lletter | uletter | '-' | digit;
@@ -66,11 +86,10 @@ uletter = 'A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R
             var sb = new SyntaxBuilder();
             var newSyntax = sb.Build(token);
 
-            const string s2 = @"
-A-1 : 123";
+            const string s2 = @"A-1 : 123";
 
             var tokenizer2 = new Tokenizer();
-            var token2 = tokenizer.Parse(s2, newSyntax);
+            var token2 = tokenizer2.Parse(s2, newSyntax);
         }
     }
 }

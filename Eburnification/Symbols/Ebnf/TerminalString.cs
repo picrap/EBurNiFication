@@ -6,6 +6,8 @@ namespace Eburnification.Symbols.Ebnf
 
     public class TerminalString : Symbol<TerminalString>
     {
+        public override bool IsCommentlessSymbol => true;
+
         public override SymbolKind Kind => SymbolKind.Literal;
 
         public override ParsingResult TryParse(Tokenizer tokenizer, Parser parser)
