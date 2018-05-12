@@ -240,5 +240,18 @@ namespace Eburnification.Parsing
 
             return results;
         }
+
+        private readonly IDictionary<string, string[]> _specialSequences = new Dictionary<string, string[]>();
+
+        public void AddSpecialSequence(string name, params string[] anyOf)
+        {
+            _specialSequences.Add(name, anyOf);
+        }
+
+        public string[] GetSpecialSequence(string name)
+        {
+            _specialSequences.TryGetValue(name, out var anyOf);
+            return anyOf;
+        }
     }
 }

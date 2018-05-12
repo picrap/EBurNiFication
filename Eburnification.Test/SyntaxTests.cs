@@ -37,15 +37,6 @@ namespace Eburnification.Test
         }
 
         [TestMethod]
-        public void SpecialSequence()
-        {
-            const string s = "a=? dude! ?;";
-            var tokenizer = new Tokenizer();
-            var token = tokenizer.Parse(s);
-            Assert.IsNotNull(token);
-        }
-
-        [TestMethod]
         public void Comment()
         {
             const string s = "(* something here *) one='1';";
@@ -60,7 +51,7 @@ namespace Eburnification.Test
             const string s = @"
 assignment = identifier, assignmentsymbol, anyvalue;
 
-space = ' ';
+space = ? whitespace ?;
 assignmentcharacter = '=' | ':';
 assignmentsymbol = {space}, assignmentcharacter, {space};
 
@@ -80,6 +71,7 @@ lletter = 'a'|'b'|'c'|'d'|'e'|'f'|'g'|'h'|'i'|'j'|'k'|'l'|'m'|'n'|'o'|'p'|'q'|'r
 uletter = 'A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z';
 ";
             var tokenizer = new Tokenizer();
+            tokenizer.AddSpecialSequence("whitespace", " ", "\t", "\n", "\r");
             var token = tokenizer.Parse(s);
             Assert.IsNotNull(token);
 
