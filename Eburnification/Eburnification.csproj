@@ -1,109 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0FD642A4-AC68-48DD-902C-5E15F4F98B3F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eburnification</RootNamespace>
+    <TargetFrameworks>net40;netstandard1.0</TargetFrameworks>
+    <SignAssembly>true</SignAssembly>
+    <PackageId>EBurNiFication</PackageId>
+    <Version>0.1</Version>
+    <Company>picrap</Company>
+    <PackageLicenseUrl>https://github.com/picrap/EBurNiFication/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/picrap/EBurNiFication</PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <RepositoryUrl>https://github.com/picrap/EBurNiFication.git</RepositoryUrl>
+    <Copyright>picrap</Copyright>
+    <Description>EBNF parser</Description>
+    <RepositoryType>git</RepositoryType>
+    <Product>EBurNiFication</Product>
+    <Authors>picrap</Authors>
     <AssemblyName>Eburnification</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>ebnf parser</PackageTags>
+    <AssemblyOriginatorKeyFile>Eburnification.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Parsing\ParsingResult.cs" />
-    <Compile Include="Parsing\TextParser.cs" />
-    <Compile Include="Parsing\TextParserState.cs" />
-    <Compile Include="Parsing\Token.cs" />
-    <Compile Include="Parsing\Parser.cs" />
-    <Compile Include="Parsing\ParserState.cs" />
-    <Compile Include="Parsing\Tokenizer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Symbols\AndSymbol.cs" />
-    <Compile Include="Symbols\DefinitionSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\BracketedTextualComment.cs" />
-    <Compile Include="Symbols\Ebnf\CharCharacterSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\CommentlessSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\CommentSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\ConcatenateSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\DecimalDigit.cs" />
-    <Compile Include="Symbols\Ebnf\DefinitionSeparatorSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\DefiningSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\DefinitionsList.cs" />
-    <Compile Include="Symbols\Ebnf\EmptySequence.cs" />
-    <Compile Include="Symbols\Ebnf\EndCommentSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\EndGroupSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\EndOptionSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\EndRepeatSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\ExceptSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\FirstQuoteSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\FirstTerminalCharacter.cs" />
-    <Compile Include="Symbols\Ebnf\GapFreeSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\GapSeparator.cs" />
-    <Compile Include="Symbols\Ebnf\GroupedSequence.cs" />
-    <Compile Include="Symbols\Ebnf\Integer.cs" />
-    <Compile Include="Symbols\Ebnf\Letter.cs" />
-    <Compile Include="Symbols\Ebnf\MetaIdentifier.cs" />
-    <Compile Include="Symbols\Ebnf\MetaIdentifierCharacter.cs" />
-    <Compile Include="Symbols\Ebnf\OptionalSequence.cs" />
-    <Compile Include="Symbols\Ebnf\OtherCharacter.cs" />
-    <Compile Include="Symbols\Ebnf\RepeatedSequence.cs" />
-    <Compile Include="Symbols\Ebnf\RepetitionSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\SecondQuoteSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\SecondTerminalCharacter.cs" />
-    <Compile Include="Symbols\Ebnf\Sequence.cs" />
-    <Compile Include="Symbols\Ebnf\SingleDefinition.cs" />
-    <Compile Include="Symbols\Ebnf\SpecialSequence.cs" />
-    <Compile Include="Symbols\Ebnf\SpecialSequenceCharacter.cs" />
-    <Compile Include="Symbols\Ebnf\SpecialSequenceSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\StartCommentSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\StartGroupSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\StartOptionSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\StartRepeatSymbol.cs" />
-    <Compile Include="Symbols\Ebnf\StringCharacterSymbol.cs" />
-    <Compile Include="Symbols\IDefinitionSymbol.cs" />
-    <Compile Include="Symbols\IRepeatSymbol.cs" />
-    <Compile Include="Symbols\LiteralSymbol.cs" />
-    <Compile Include="Symbols\LookupSymbol.cs" />
-    <Compile Include="Symbols\ExceptSymbol.cs" />
-    <Compile Include="Symbols\OrSymbol.cs" />
-    <Compile Include="Symbols\RepeatSymbol.cs" />
-    <Compile Include="Symbols\Symbol.cs" />
-    <Compile Include="Symbols\Ebnf\SyntacticException.cs" />
-    <Compile Include="Symbols\Ebnf\SyntacticFactor.cs" />
-    <Compile Include="Symbols\Ebnf\SyntacticPrimary.cs" />
-    <Compile Include="Symbols\Ebnf\SyntacticTerm.cs" />
-    <Compile Include="Symbols\Ebnf\Syntax.cs" />
-    <Compile Include="Symbols\Ebnf\SyntaxRule.cs" />
-    <Compile Include="Symbols\Ebnf\TerminalCharacter.cs" />
-    <Compile Include="Symbols\Ebnf\TerminalString.cs" />
-    <Compile Include="Symbols\Ebnf\TerminatorSymbol.cs" />
-    <Compile Include="Symbols\SymbolKind.cs" />
-    <Compile Include="Syntax\SyntaxBuilder.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

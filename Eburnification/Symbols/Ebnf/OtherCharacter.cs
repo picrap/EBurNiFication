@@ -8,7 +8,7 @@ namespace Eburnification.Symbols.Ebnf
 
     public class OtherCharacter : Symbol<OtherCharacter>
     {
-        private static readonly IEnumerable<char> OtherCharacters = " .:!+_%@&#$<>/\\~^";
+        private static readonly IEnumerable<char> OtherCharacters = new char[] { ' ', '.', ':', '!', '+', '_', '%', '@', '&', '#', '$', '<', '>', '/', '\\', '~', '^' };
 
         public override SymbolKind Kind => SymbolKind.Literal;
 
